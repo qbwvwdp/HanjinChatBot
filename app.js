@@ -14,11 +14,6 @@ if(process.env.exec_env!="production"){
 // (추가)대화 로그 기록
 var log = require('./db/log');
 
-// (추가) - 측정을 위한 모듈 실행 코드 추가 
-const appInsights = require("applicationinsights");
-appInsights.setup(process.env.ApplicationInsightsKey);
-appInsights.start();
-
 
 // Setup Restify Server
 var server = restify.createServer(); // instance 생성
