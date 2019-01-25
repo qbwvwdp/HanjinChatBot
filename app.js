@@ -11,6 +11,9 @@ if(process.env.exec_env!="production"){
     require('dotenv').config();
 }
 
+// (추가)대화 로그 기록
+var log = require('./db/log');
+
 // Setup Restify Server
 var server = restify.createServer(); // instance 생성
 server.listen(process.env.port || process.env.PORT || 3978, function () {  // listen 상태로 변환 (port 지정 - 대소문자 구문 해주기 때문에 port,PORT)
@@ -41,6 +44,17 @@ var tableStorage = new botbuilder_azure.AzureBotStorage({ gzipData: false }, azu
 var bot = new builder.UniversalBot(connector);
 bot.set('storage', tableStorage);
 
+// (추가) middleware logging
+bot.use({
+    receive: function (event, next) {
+        log.Log(event,() => {})
+        next();
+    },
+    send: function (event, next) {
+        log.Log(event,() => {})
+        next();
+    }
+});
 
 // (추가) conversationUpdate 이벤트 핸들러
 bot.on('conversationUpdate', function (message) {
@@ -52,6 +66,7 @@ bot.on('conversationUpdate', function (message) {
         });
     }
 });
+
 /*
 bot.dialog('/', function (session) {
     session.send('Echo Server ' + session.message.text);
