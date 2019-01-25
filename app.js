@@ -18,6 +18,10 @@ var log = require('./db/log');
 var server = restify.createServer(); // instance 생성
 server.listen(process.env.port || process.env.PORT || 3978, function () {  // listen 상태로 변환 (port 지정 - 대소문자 구문 해주기 때문에 port,PORT)
    console.log('%s listening to %s', server.name, server.url);   // parameter로 funtion ( closer ) 사용 가능
+   // 대화 로그 기록을 위한 초기화
+   log.Init(function() {
+    console.log('챗봇 로그 디비 초기화 성공');
+    });
 });
   
 // Create chat connector for communicating with the Bot Framework Service
