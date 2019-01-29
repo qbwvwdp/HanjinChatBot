@@ -5,6 +5,9 @@ A simple echo bot for the Microsoft Bot Framework.
 var restify = require('restify');//
 var builder = require('botbuilder');
 var botbuilder_azure = require("botbuilder-azure");
+//웹페이지 오픈하기 위해(npm install opn 먼저해야함)
+var opn = require('opn');
+
 
 // 로컬 실행 시 환경 변수 값 읽기 
 if (process.env.exec_env!="production") {     
@@ -139,28 +142,36 @@ bot.dialog('예약조회Dialog', //여기에 matching됨
 }); 
 
 bot.dialog('특가Dialog', //여기에 matching됨
-    (session) => { 
-        session.send({
-            attachments : [{
-                contentType: "image/jpeg",
-                contentUrl: "https://postfiles.pstatic.net/MjAxOTAxMjlfNDcg/MDAxNTQ4NzIyODMxODEw.6GF5WRVNuoRIvnMxPYmQDF3LYQgGc6Ho-RviSk7go4cg.nZYiPP_TSXX1leUV_GI8T9HQYDZv011H8Mvs0Ox6t9Ig.PNG.fdclub123/노진수님의_맞춤항공설정.PNG?type=w773"
-            }]
+    function (session, results) {               
+        builder.Prompts.choice(
+            session, 
+            " 특가 및 이벤트에 대한 내용으로 이동하겠습니까? ", ["홈페이지이동"],
+            { listStyle: builder.ListStyle.button });
+            {return results}
+            console.log('%s', results);
+        },
 
-        });
-        session.send({
-            attachments : [{
-                contentType: "image/jpeg",
-                contentUrl: "https://postfiles.pstatic.net/MjAxOTAxMjlfMjUg/MDAxNTQ4NzIzMDc4OTE1.88GshgQJYtgRSMc_tk5gNF1TCI0UKIKNU89YJhPsujgg.TqfuJiwjjTMzfavoCf9ep7Aat6IdKGV8Eo0o9IpbCZkg.PNG.fdclub123/검색결과.PNG?type=w773"
-            }]
-        });
-    } 
+        function (session, results) {
+            
+            session.userData.contentType = results.response.entity;
+            if(session.userData.contentType == "홈페이지이동"){
+                session.send("나오는겨?");
+               // opens the url in the default browser 
+               opn('https://www.jinair.com/promotion/index');
+               // specify the app to open in 
+               opn('https://www.jinair.com/promotion/index', {app: 'chrome'});
+            }
+        }    
 ).triggerAction({ 
     matches: '특가' 
 }); 
 
+
+
 bot.dialog('시작화면Dialog', //여기에 matching됨
     (session) => { 
             session.beginDialog('/')
+            
         } 
     
 ).triggerAction({ 
