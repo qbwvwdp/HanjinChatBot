@@ -25,10 +25,27 @@ function Init(callback) {
     });
 }
 
-function Log(log, callback) {    
+function Log(log, callback) {
     cosmosDB.collection(logCollection).insertOne(
         { 
-            log,
+            log
+        }, 
+        function (err, result) {            
+            if(err)
+            {
+                console.log(`${logCollection} 컬렉션에 로그 입력 실패`);
+                callback();
+            }else {                
+                callback();
+            }
+        });
+}
+
+function TestFunc(a, callback ){
+    var text = a.text ? a.text : next();
+    cosmosDB.collection(logCollection).insertOne(
+        { 
+            text
         }, 
         function (err, result) {            
             if(err)
@@ -43,3 +60,4 @@ function Log(log, callback) {
 
 exports.Init = Init; // 다른 곳에서 실행 가능하도록 해줌. ex) app.js
 exports.Log = Log;
+exports.TestFunc = TestFunc;
