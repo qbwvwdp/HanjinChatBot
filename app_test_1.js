@@ -94,12 +94,8 @@ bot.dialog('/', [
         session.send('안녕하세요. 제이드(Jaid)입니다.');        
         builder.Prompts.choice(
             session, 
-<<<<<<< HEAD
             " 다음의 항목 중 선택해 주시면 최선을 다해 도와드리겠습니다. ", ["스케줄조회", "출도착조회", "예약조회", "이벤트 / 특가","알리미"],
-=======
-            " 다음의 항목 중 선택해 주시면 최선을 다해 도와드리겠습니다. ", ["스케줄조회", "출도착조회", "예약조회", "이벤트 / 특가"],
->>>>>>> 58dfed900e4ee31ef0e2d9e9a7a2854924aa33c5
-            { listStyle: builder.ListStyle.button });
+          { listStyle: builder.ListStyle.button });
     },
 ]);
 
