@@ -94,23 +94,34 @@ bot.dialog('/', [
         session.send('안녕하세요. 제이드(Jaid)입니다.');        
         builder.Prompts.choice(
             session, 
-            " 다음의 항목 중 선택해 주시면 최선을 다해 도와드리겠습니다. ", ["스케줄조회", "출도착조회", "예약조회", "맞춤항공권"],
+            " 다음의 항목 중 선택해 주시면 최선을 다해 도와드리겠습니다. ", ["스케줄조회", "출도착조회", "예약조회", "이벤트 / 특가"],
             { listStyle: builder.ListStyle.button });
     },
 ]);
 
 // matches 영역에 직접 작성한 intent 명을 입력하시고, 응답 문구를 수정하세요. 
-bot.dialog('스케줄조회Dialog', //여기에 matching됨
+bot.dialog('스케줄조회Dialog', [//여기에 matching됨
     (session) => { 
-        session.send({
-            attachments : [{
-                contentType: "image/jpeg",
-                contentUrl: "https://postfiles.pstatic.net/MjAxOTAxMjlfMTIz/MDAxNTQ4NzIyMjQ0MzQx.fE0UIgJ_3ZInUPEFMUJc_57VVgM6ZSDk7dcctjq9vnsg.ccNiUiJhNx1T_NY5PTv-IZZWeArsK47CtGV5x_z0vn8g.PNG.fdclub123/스케줄조회.PNG?type=w773"
-            }]
-        });
+        //로그인 했을 시
+        builder.Prompts.choice(
+            session, 
+            " 본인의 예약 일정을 보시겠습니까? 또는 주간 비행기 일정을 보시겠습니까? ", ["예약 일정", "주간스케줄"],
+            { listStyle: builder.ListStyle.button });
+        },
+        function(session, results) {
+            session.userData.text = results.response.entity;
+            //console.log(`entity: ${results.response.entity}`);
+            
+            if(session.userData.text == '주간스케줄'){
+               // opens the url in the default browser 
+               opn('https://www.jinair.com/promotion/index');
+               // specify the app to open in 
+               //opn('https://www.jinair.com/promotion/index', {app: 'chrome'});
+            }
+
        // session.endDialog(); 
     } 
-).triggerAction({ 
+]).triggerAction({ 
     matches: '스케줄조회' 
 }); 
 
@@ -141,29 +152,30 @@ bot.dialog('예약조회Dialog', //여기에 matching됨
     matches: '예약조회' 
 }); 
 
-bot.dialog('특가Dialog', //여기에 matching됨
-    function (session, results) {               
+bot.dialog('특가Dialog', [//여기에 matching됨
+    function (session) {        
         builder.Prompts.choice(
             session, 
-            " 특가 및 이벤트에 대한 내용으로 이동하겠습니까? ", ["홈페이지이동"],
+            " 특가 및 이벤트에 대한 내용으로 이동하겠습니까? ", ["예", "아니요"],
             { listStyle: builder.ListStyle.button });
-            {return results}
-            console.log('%s', results);
         },
-
-        function (session, results) {
+        function(session, results) {
+            session.userData.text = results.response.entity;
+            //console.log(`entity: ${results.response.entity}`);
             
-            session.userData.contentType = results.response.entity;
-            if(session.userData.contentType == "홈페이지이동"){
-                session.send("나오는겨?");
+            if(session.userData.text == '예'){
                // opens the url in the default browser 
                opn('https://www.jinair.com/promotion/index');
                // specify the app to open in 
-               opn('https://www.jinair.com/promotion/index', {app: 'chrome'});
+               //opn('https://www.jinair.com/promotion/index', {app: 'chrome'});
             }
-        }    
-).triggerAction({ 
-    matches: '특가' 
+            else{
+                session.endDialog();
+                session.beginDialog('/')
+            }
+        }          
+    ]).triggerAction({ 
+    matches: ['특가', '이벤트']
 }); 
 
 
