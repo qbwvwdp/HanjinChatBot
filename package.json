@@ -15,6 +15,7 @@
     "botbuilder-azure": "^3.0.4",
     "dotenv": "^6.2.0",
     "mongodb": "^3.1.13",
+    "opn": "^5.4.0",
     "restify": "^5.0.0"
   },
   "devDependencies": {
