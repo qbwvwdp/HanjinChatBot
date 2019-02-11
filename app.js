@@ -78,11 +78,15 @@ console.log(`connect LUIS ${LuisModelUrl}`);
 var recognizer = new builder.LuisRecognizer(LuisModelUrl); 
 bot.recognizer(recognizer); 
 
+var a = true;
 
 // (추가) conversationUpdate 이벤트 핸들러
 bot.on('conversationUpdate', function (message) {
     if (message.membersAdded) {
         message.membersAdded.forEach(function (identity) {
+
+            
+
             if (identity.id === message.address.bot.id) {
                 bot.beginDialog(message.address, '/'); // '/'를 만나면  /에 해당되는 dialog로 가라
             }
@@ -92,12 +96,16 @@ bot.on('conversationUpdate', function (message) {
 var TempID = "TEST-ID005";
 // (수정)
 bot.dialog('/', [
-    function (session) {        
-        session.send('안녕하세요. 제이드(Jaid)입니다.');        
-        builder.Prompts.text(
-            session, 
-            " 원하는 서비스를 입력해주세요.\n 예 ) 스케줄조회, 이벤트, 특가상품, 맞춤항공권,최근검색이력 "
-            );
+    function (session,args) {
+        if(args.message.text == "hello" ){
+
+        } else {     
+            session.send('안녕하세요. 제이드(Jaid)입니다.');        
+            builder.Prompts.text(
+                session, 
+                " 원하는 서비스를 입력해주세요.\n 예 ) 스케줄조회, 이벤트, 특가상품, 맞춤항공권,최근검색이력 "
+                );
+        }
     },
     function(session, results){
         var tmpLuis = LoadInfo.getLuisIntent(results.response);
