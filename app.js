@@ -96,7 +96,7 @@ bot.dialog('/', [
         session.send('안녕하세요. 제이드(Jaid)입니다.');        
         builder.Prompts.text(
             session, 
-            " 다음의 항목들 중 선택해 주시면 최선을 다해 도와드리겠습니다. , [스케줄조회, 이벤트, 특가상품, 맞춤항공권,최근검색이력 "
+            " 원하는 서비스를 입력해주세요.\n 예 ) 스케줄조회, 이벤트, 특가상품, 맞춤항공권,최근검색이력 "
             );
     },
     function(session, results){
@@ -122,11 +122,11 @@ bot.dialog('/', [
 
             session.beginDialog('특가Dialog');
         } 
-        else if(session.userData.Type == "맞춤항공권"){
+        else if(tmpLuis.topScoringIntent.intent == "맞춤항공권"){
 
             session.beginDialog('맞춤항공권Dialog');
         }
-        else if(session.userData.Type == '최근검색이력') {
+        else if(tmpLuis.topScoringIntent.intent == '최근검색이력') {
             session.beginDialog('최근검색이력Dialog');
         }else {
 
