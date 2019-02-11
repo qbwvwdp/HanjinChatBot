@@ -310,7 +310,7 @@ bot.dialog('최근검색이력Dialog', [
         if(session.userData.text == '최근 조회 내역') {
             session.beginDialog('recently');
         }
-        else if(session.userData.text == '맞춤항공권 내역') {
+        else if(session.userData.text == '맞춤항공권 예약 현황') {
             session.beginDialog('fit');
         }
     }
@@ -318,7 +318,7 @@ bot.dialog('최근검색이력Dialog', [
 
 bot.dialog('talk', [
     function (session) {
-        builder.Prompts.choice(session, " 본인의 최근 조회 내역을 보시겠습니까?\n 또는 맞춤항공권 내역을 보시겠습니까? ", ["최근 조회 내역", "맞춤항공권 내역"], { listStyle: builder.ListStyle.button});
+        builder.Prompts.choice(session, " 본인의 최근 항공 조회 내역 혹은 맞춤항공권 예약 현황을 보시겠습니까? ", ["최근 조회 내역", "맞춤항공권 예약 현황"], { listStyle: builder.ListStyle.button});
     }
 ])
 
@@ -468,7 +468,7 @@ bot.dialog('fit', [
                 let messageWithCarouselOfCards = [ //카드로 받아서
                     new builder.HeroCard(session)
                     .title('목적지 : ' + data.notify.depart[0] + ' , 테마 : ' + data.notify.theme[0])
-                    .subtitle('기간 : ' + data.notify.period[0] + ' , 예산 : ' + data.notify.asset[0] + '만원')
+                    .subtitle('기간 : ' + data.notify.period[0] + '일 , 예산 : ' + data.notify.asset[0] + '만원')
                     .images([
                         builder.CardImage.create(session, getImgLink(data.notify.theme[0]))
                     ])
@@ -487,7 +487,7 @@ bot.dialog('fit', [
                 let messageWithCarouselOfCards = [ //카드로 받아서
                     new builder.HeroCard(session)
                         .title('목적지 : ' + data.notify.depart[0] + ' , 테마 : ' + data.notify.theme[0])
-                        .subtitle('기간 : ' + data.notify.period[0] + ' , 예산 : ' + data.notify.asset[0] + '만원')
+                        .subtitle('기간 : ' + data.notify.period[0] + '일 , 예산 : ' + data.notify.asset[0] + '만원')
                         .images([
                             builder.CardImage.create(session, getImgLink(data.notify.theme[0]))
                         ])
@@ -496,7 +496,7 @@ bot.dialog('fit', [
                         ]),
                         new builder.HeroCard(session)
                         .title('목적지 : ' + data.notify.depart[1] + ' , 테마 : ' + data.notify.theme[1])
-                        .subtitle('기간 : ' + data.notify.period[1] + ' , 예산 : ' + data.notify.asset[1] + '만원')
+                        .subtitle('기간 : ' + data.notify.period[1] + '일 , 예산 : ' + data.notify.asset[1] + '만원')
                         .images([
                             builder.CardImage.create(session, getImgLink(data.notify.theme[1]))
                         ])
@@ -515,7 +515,7 @@ bot.dialog('fit', [
                 let messageWithCarouselOfCards = [ //카드로 받아서
                     new builder.HeroCard(session)
                         .title('목적지 : ' + data.notify.depart[count-3] + ' , 테마 : ' + data.notify.theme[count-3])
-                        .subtitle('기간 : ' + data.notify.period[count-3] + ' , 예산 : ' + data.notify.asset[count-3] + '만원')
+                        .subtitle('기간 : ' + data.notify.period[count-3] + '일 , 예산 : ' + data.notify.asset[count-3] + '만원')
                         .images([
                                 builder.CardImage.create(session, getImgLink(data.notify.theme[count-3]))
                             ])
@@ -524,7 +524,7 @@ bot.dialog('fit', [
                             ]),
                             new builder.HeroCard(session)
                             .title('목적지 : ' + data.notify.depart[count-2] + ' , 테마 : ' + data.notify.theme[count-2])
-                            .subtitle('기간 : ' + data.notify.period[count-2] + ' , 예산 : ' + data.notify.asset[count-2] + '만원')
+                            .subtitle('기간 : ' + data.notify.period[count-2] + '일 , 예산 : ' + data.notify.asset[count-2] + '만원')
                             .images([
                                 builder.CardImage.create(session, getImgLink(data.notify.theme[count-2]))
                             ])
@@ -533,7 +533,7 @@ bot.dialog('fit', [
                             ]),
                             new builder.HeroCard(session)
                             .title('목적지 : ' + data.notify.depart[count-1] + ' , 테마 : ' + data.notify.theme[count-1])
-                            .subtitle('기간 : ' + data.notify.period[count-1] + ' , 예산 : ' + data.notify.asset[count-1] + '만원')
+                            .subtitle('기간 : ' + data.notify.period[count-1] + '일 , 예산 : ' + data.notify.asset[count-1] + '만원')
                             .images([
                                 builder.CardImage.create(session, getImgLink(data.notify.theme[count-1]))
                             ])
@@ -552,7 +552,7 @@ bot.dialog('fit', [
                 )
             } 
 ]).triggerAction({
-    matches: '맞춤항공권'
+    matches: '맞춤항공권 예약 현황'
 });
 
 bot.dialog('weeksche', [//여기에 matching됨
