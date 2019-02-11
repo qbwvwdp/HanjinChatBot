@@ -452,10 +452,12 @@ bot.dialog('recently', [
 
 bot.dialog('fit', [
     // 맞춤 항공권 내역(목적지, 기간, 테마, 예산)
-    function (session) {
-        session.send('================================================step 1 ==========================================');
-        log.FindUserFunc(TempID,(param)=>{
+    function (session) {log.FindUserFunc(TempID,(param)=>{
             data = JSON.parse(param);
+            session.send(data.notify.depart);
+            session.send(typeof(data.notify.depart));
+
+
             var count = 3;
             if(count == 0){
                 session.send("최근 조회 내역이 없습니다.\n처음으로 돌아갑니다.")
