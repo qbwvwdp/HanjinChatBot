@@ -102,7 +102,7 @@ bot.dialog('/', [
     function(session, results){
         var tmpLuis = LoadInfo.getLuisIntent(results.response);
         //session.userData.Type = results.response.entity;
-        console.log("********************************");
+        console.log("********************************")
         console.log(results.response);
         console.dir(tmpLuis);
         console.log(tmpLuis.topScoringIntent.intent);
@@ -798,7 +798,7 @@ bot.dialog('pass', //여기에 matching됨
             //.subtitle('막내가 사장실 구경가는 프로모션')
             //.text('#막내야_우리는_ #수하물도_주고 #기내식도_주는데 #이_가격은_어디서_왔어?^^')
             .images([
-                builder.CardImage.create(session, 'https://postfiles.pstatic.net/MjAxOTAxMjlfMTcg/MDAxNTQ4NzIyNzI1MjE1.2JeiOZajUx1_TuQNo6FqmJBrZXiIm2gTJsryje2psp0g.sXBelwjD6IbwZf2XPutrz07As7S4oMQNnn0PiUtk69Mg.PNG.fdclub123/예약조회.PNG?type=w773')
+                builder.CardImage.create(session, 'https://imgur.com/ep4tcMi.png')
             ])
             //.buttons([
                 //builder.CardAction.openUrl(session, 'https://www.jinair.com/promotion/eventView?evntSeq=10784', '자세히 보기')
