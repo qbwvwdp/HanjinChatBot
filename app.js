@@ -139,7 +139,7 @@ bot.dialog('스케줄조회Dialog', [ //여기에 matching됨
         if(session.userData.text == '주간스케줄') {
             session.beginDialog('tnum');
         }
-        else if(session.userData.text == '예약일정') {
+        else if(session.userData.text == '예약 확인') {
             session.beginDialog('pass');
         }
     }
@@ -149,7 +149,7 @@ bot.dialog('스케줄조회Dialog', [ //여기에 matching됨
 
 bot.dialog('ask', [
     function (session) {
-        builder.Prompts.choice(session, " 본인의 예약 일정을 보시겠습니까? 또는 주간 비행기 일정을 보시겠습니까? ", ["예약일정", "주간스케줄"], { listStyle: builder.ListStyle.button});
+        builder.Prompts.choice(session, " 본인의 예약 일정을 보시겠습니까? 또는 주간 비행기 일정을 보시겠습니까? ", ["예약 확인", "주간스케줄"], { listStyle: builder.ListStyle.button});
     }
 ])
 
@@ -183,7 +183,7 @@ bot.dialog('tnum', [
             }
             else{
                 if(Origin_Entity == null){
-                    session.send('출항지가 아닙니다.');
+                    session.send('출발지가 아닙니다.');
                 };
                 if(Destination_Entity == null){
                     session.send('목적지가 아닙니다.');
@@ -205,7 +205,7 @@ bot.dialog('tnum', [
                 'body': [
                     {
                         'type': 'Container',
-                        'speak': '<s>안녕하세요!</s><s>비행기 목적지와 출발날짜를 입력해 주시겠어요?</s>',
+                        'speak': '<s>안녕하세요!</s><s>비행기 목적지와 출발날짜를 입력해 주세요.</s>',
                         'items': [
                             {
                                 'type': 'ColumnSet',
@@ -234,7 +234,7 @@ bot.dialog('tnum', [
                                             },
                                             {
                                                 'type': 'TextBlock',
-                                                'text': '비행기 목적지와 출발날짜를 입력해 주시겠어요?',
+                                                'text': '비행기 목적지와 출발날짜를 입력해 주세요.',
                                                 'wrap': true
                                             }
                                         ]
@@ -325,28 +325,28 @@ bot.dialog('talk', [
 var charge = '150000';
 function getImgLink(Name){
     if(Name == "다 낭"){
-        return "https://imgur.com/UGgZ03x.jpg";
+        return "https://imgur.com/4gJcePw.jpg";
     }
     else if(Name == "도 쿄"){
-        return "https://imgur.com/mVQ3k77.jpg";
+        return "https://imgur.com/0QtO63C.jpg";
     }
     else if(Name == "제 주"){
-        return "https://imgur.com/f6u3UC2.png";
+        return "https://imgur.com/BNmDqlR.jpg";
     }
     else if(Name == "쇼핑"){
-        return "https://imgur.com/nrhVLLa.jpg";
+        return "https://imgur.com/WoAvNAI.jpg";
     }
     else if(Name == "친구"){
-        return "https://imgur.com/KM6khrz.jpg";
+        return "https://imgur.com/V3HTWCO.jpg";
     }
     else if(Name == "해변"){
-        return "https://imgur.com/vH9jcHk.jpg";
+        return "https://imgur.com/XCRJdV4.jpg";
     }
     else if(Name == "도시"){
-        return "https://imgur.com/ZYe76sk.jpg";
+        return "https://imgur.com/anX8G7g.jpg";
     }
     else if(Name == "미식"){
-        return "https://imgur.com/2iqnyoE.jpg";
+        return "https://imgur.com/YyUPyNf.jpg";
     }
 
 }
@@ -468,7 +468,7 @@ bot.dialog('fit', [
                 let messageWithCarouselOfCards = [ //카드로 받아서
                     new builder.HeroCard(session)
                     .title('목적지 : ' + data.notify.depart[0] + ' , 테마 : ' + data.notify.theme[0])
-                    .subtitle('기간 : ' + data.notify.period[0] + ' , 예산 : ' + data.notify.asset[0] + '원')
+                    .subtitle('기간 : ' + data.notify.period[0] + ' , 예산 : ' + data.notify.asset[0] + '만원')
                     .images([
                         builder.CardImage.create(session, getImgLink(data.notify.theme[0]))
                     ])
@@ -487,7 +487,7 @@ bot.dialog('fit', [
                 let messageWithCarouselOfCards = [ //카드로 받아서
                     new builder.HeroCard(session)
                         .title('목적지 : ' + data.notify.depart[0] + ' , 테마 : ' + data.notify.theme[0])
-                        .subtitle('기간 : ' + data.notify.period[0] + ' , 예산 : ' + data.notify.asset[0] + '원')
+                        .subtitle('기간 : ' + data.notify.period[0] + ' , 예산 : ' + data.notify.asset[0] + '만원')
                         .images([
                             builder.CardImage.create(session, getImgLink(data.notify.theme[0]))
                         ])
@@ -496,7 +496,7 @@ bot.dialog('fit', [
                         ]),
                         new builder.HeroCard(session)
                         .title('목적지 : ' + data.notify.depart[1] + ' , 테마 : ' + data.notify.theme[1])
-                        .subtitle('기간 : ' + data.notify.period[1] + ' , 예산 : ' + data.notify.asset[1] + '원')
+                        .subtitle('기간 : ' + data.notify.period[1] + ' , 예산 : ' + data.notify.asset[1] + '만원')
                         .images([
                             builder.CardImage.create(session, getImgLink(data.notify.theme[1]))
                         ])
@@ -515,7 +515,7 @@ bot.dialog('fit', [
                 let messageWithCarouselOfCards = [ //카드로 받아서
                     new builder.HeroCard(session)
                         .title('목적지 : ' + data.notify.depart[count-3] + ' , 테마 : ' + data.notify.theme[count-3])
-                        .subtitle('기간 : ' + data.notify.period[count-3] + ' , 예산 : ' + data.notify.asset[count-3] + '원')
+                        .subtitle('기간 : ' + data.notify.period[count-3] + ' , 예산 : ' + data.notify.asset[count-3] + '만원')
                         .images([
                                 builder.CardImage.create(session, getImgLink(data.notify.theme[count-3]))
                             ])
@@ -524,7 +524,7 @@ bot.dialog('fit', [
                             ]),
                             new builder.HeroCard(session)
                             .title('목적지 : ' + data.notify.depart[count-2] + ' , 테마 : ' + data.notify.theme[count-2])
-                            .subtitle('기간 : ' + data.notify.period[count-2] + ' , 예산 : ' + data.notify.asset[count-2] + '원')
+                            .subtitle('기간 : ' + data.notify.period[count-2] + ' , 예산 : ' + data.notify.asset[count-2] + '만원')
                             .images([
                                 builder.CardImage.create(session, getImgLink(data.notify.theme[count-2]))
                             ])
@@ -533,7 +533,7 @@ bot.dialog('fit', [
                             ]),
                             new builder.HeroCard(session)
                             .title('목적지 : ' + data.notify.depart[count-1] + ' , 테마 : ' + data.notify.theme[count-1])
-                            .subtitle('기간 : ' + data.notify.period[count-1] + ' , 예산 : ' + data.notify.asset[count-1] + '원')
+                            .subtitle('기간 : ' + data.notify.period[count-1] + ' , 예산 : ' + data.notify.asset[count-1] + '만원')
                             .images([
                                 builder.CardImage.create(session, getImgLink(data.notify.theme[count-1]))
                             ])
@@ -608,7 +608,7 @@ bot.dialog ('recomnd', [
     function (session) {
         builder.Prompts.choice(
             session,
-            "[초특가알림] 노진수님께 추천하는 특가상품이 있는데 보시겠어요?  ", ["볼래요", "괜찮아요"],
+            "[초특가알림] 고객님께 추천하는 특가상품이 있는데 보시겠습니까?  ", ["볼래요", "괜찮아요"],
             { listStyle: builder.ListStyle.button });
     },
     function(session, results) {
@@ -806,7 +806,7 @@ bot.dialog('pass', //여기에 matching됨
         
     } 
 ).triggerAction({ 
-    matches: ['예약일정', '예약조회']
+    matches: ['예약 확인', '예약조회']
 }); 
 
 bot.dialog('이벤트Dialog', [//여기에 matching됨
@@ -834,7 +834,7 @@ bot.dialog('이벤트Dialog', [//여기에 matching됨
 bot.dialog('특가Dialog', [//여기에 matching됨
     function (session) {        
         session.send('현재 진행중인 특가를 알려드립니다.'); 
-        session.send('알고싶은 월(달)을 클릭해주세요.'); 
+        session.send('알고싶은 월(달)을 선택 해주세요.'); 
         builder.Prompts.choice(
             session, 
             " 해당 월(달)의 특가로 이동합니다.", ["1월 ~ 3월", "4월 ~ 6월", "7월 ~ 9월", "10월 ~ 12월"],
@@ -1079,7 +1079,7 @@ bot.dialog('맞춤항공권Dialog',[
                 }
                 else{
                     if(Place_Entity == null){
-                        session.send('리스트에 없는 장소입니다.');
+                        session.send('진에어 취항지가 아닙니다.');
                     };
                     session.message.value = null; //이전의 잘못된 메세지 내용이 저장되어있어 다음으로 안넘어가고 무한루프로 실행됨. => 메세지 내용 삭제 => 다시 시작함
                 };
@@ -1099,7 +1099,7 @@ bot.dialog('맞춤항공권Dialog',[
                 'body': [
                     {
                         'type': 'Container',
-                        'speak': '<s>안녕하세요 맞춤항공권!</s><s>아래의 항목에 정보를 기입해주세요. </s>',
+                        'speak': '<s>안녕하세요 맞춤항공권 서비스 입니다!</s><s>아래의 항목에 정보를 기입해주세요. </s>',
                         'items': [
                             {
                                 'type': 'ColumnSet',
@@ -1128,7 +1128,7 @@ bot.dialog('맞춤항공권Dialog',[
                                             },
                                             {
                                                 'type': 'TextBlock',
-                                                'text': '비행기 목적지와 출발날짜, 기간, 테마를 입력해주세요?',
+                                                'text': '비행기 출발지와 출발날짜, 기간, 테마를 입력해주세요.',
                                                 'wrap': true
                                             }
                                         ]
@@ -1156,14 +1156,14 @@ bot.dialog('맞춤항공권Dialog',[
                                 },
                                 {
                                     'type': 'TextBlock',
-                                    'text': '목적지를 입력해주세요 :'
+                                    'text': '출발지를 입력해주세요 :'
                                 },
                                 {
                                     'type': 'Input.Text',
                                     'id': 'destination',
                                     'speak': '<s>출발지를 입력해주세요 :</s>',
-                                    'placeholder': '예) 다낭',
-                                    'default' : '다낭',
+                                    'placeholder': '예) 인천',
+                                    'default' : '인천',
                                     'style': 'text'
                                 },
                                 {
@@ -1173,12 +1173,12 @@ bot.dialog('맞춤항공권Dialog',[
                                 {
                                     'type': 'Input.Text',
                                     'id': 'budget',
-                                    'speak': '<s>예산을 입력해주세요 :</s>',
+                                    'speak': '<s>예산을 입력해주세요 ( 단위 KRW10,000 ):</s>',
                                     'default' : '1'
                                 },
                                 {
                                     'type': 'TextBlock',
-                                    'text': '기간을 입력해주세요 :'
+                                    'text': '기간을 입력해주세요 ( 단위 일 ) :'
                                 },
                                 {
                                     'type': 'Input.Text',
