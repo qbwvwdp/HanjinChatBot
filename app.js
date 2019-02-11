@@ -98,9 +98,8 @@ var TempID = "TEST-ID005";
 bot.dialog('/', [
     function (session,args) {
         if(args.message.text == "hello" ){
-
-        } else {     
-            session.send('안녕하세요. 제이드(Jaid)입니다.');        
+            session.send('안녕하세요. 제이드(Jaid)입니다.');    
+        } else {         
             builder.Prompts.text(
                 session, 
                 " 원하는 서비스를 입력해주세요.\n 예 ) 스케줄조회, 이벤트, 특가상품, 맞춤항공권,최근검색이력 "
