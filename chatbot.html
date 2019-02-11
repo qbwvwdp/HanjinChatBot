@@ -1,10 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- <link href="https://cdn.botframework.com/botframework-webchat/latest/botchat.css" rel="stylesheet" />
+            -->
+        <style>
+          html, body { height: 100% }
+          body { margin: 0 }
+          #webchat,
+          #webchat > * {
+            height: 100%;
+            width: 100%;
+          }
+        </style>
+    </head>
   <body>
-    <iframe src='https://webchat.botframework.com/embed/qbwvwdp-bot?s=BHgMLxLpxcA.cwA.cP8.k0GbZcS1gk-Ti2HZG2z8VBktrRjOVK7otkRu3QePaAQ'  style='min-width: 400px; width: 100%; min-height: 500px;'></iframe>
+    <div id="webchat" role="main"></div>
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+    <script>
+      
+      const styleSet = window.WebChat.createStyleSet({
+        bubbleBackground: 'rgba(0, 0, 255, .1)',
+        bubbleFromUserBackground: 'rgba(0, 255, 0, .1)'
+      });
+
+      // After generated, you can modify the CSS rules
+      styleSet.textContent = { ...styleSet.textContent,
+        fontFamily: '\'Comic Sans MS\', \'Arial\', sans-serif',
+        fontWeight: 'bold'
+      };
+
+      window.WebChat.renderWebChat({
+        directLine: window.WebChat.createDirectLine({ secret: 'Tw25McAbN-A.cwA.d0o.Kr0oDMNg4ZJu858mXANNJXwsmL0LUb14fOApuD1fKbA' }),
+        // Passing avatar initials when rendering Web Chat
+        botAvatarInitials: 'JAID',
+        userAvatarInitials: 'USER',
+        resize: 'detect'
+      }, document.getElementById('webchat'));
+    </script>
   </body>
 </html>
