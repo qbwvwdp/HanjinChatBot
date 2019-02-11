@@ -303,9 +303,7 @@ bot.dialog('최근검색이력Dialog', [
         builder.Prompts.choice(session, " 본인의 최근 항공 조회 내역 혹은 맞춤항공권 예약 현황을 보시겠습니까? ", ["최근 조회 내역", "맞춤항공권 예약 현황"], { listStyle: builder.ListStyle.button});
     },
     function (session, results) {
-        session.send('================================================step 2 ==========================================');
         session.userData.text = results.response.entity;
-        session.send('step3',session.userData.text);
         if(session.userData.text == '최근 조회 내역') {
             session.beginDialog('recently');
         }
@@ -450,7 +448,6 @@ bot.dialog('recently', [
 bot.dialog('fit', [
     // 맞춤 항공권 내역(목적지, 기간, 테마, 예산)
     function (session) {
-        session.send('================================================step 1 ==========================================');
         log.FindUserFunc(TempID,(param)=>{
             data = JSON.parse(param);
             var count = 3;
