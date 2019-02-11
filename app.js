@@ -302,8 +302,9 @@ bot.dialog('tnum', [
     }
 ])
 bot.dialog('최근검색이력Dialog', [
-    function (session) {
+    function (session, results, next) {
         builder.Prompts.choice(session, " 본인의 최근 항공 조회 내역 혹은 맞춤항공권 예약 현황을 보시겠습니까? ", ["최근 조회 내역", "맞춤항공권 예약 현황"], { listStyle: builder.ListStyle.button});
+        next();
     },
     function (session, results) {
         session.send('================================================step 2 ==========================================');
