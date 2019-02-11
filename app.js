@@ -92,13 +92,17 @@ bot.on('conversationUpdate', function (message) {
 var TempID = "TEST-ID005";
 // (수정)
 bot.dialog('/', [
-    function (session,results,next) {        
+    function (session) {        
         session.send('안녕하세요. 제이드(Jaid)입니다.');        
-        builder.Prompts.text(session, " 다음의 항목들 중 선택해 주시면 최선을 다해 도와드리겠습니다. [스케줄조회, 이벤트, 특가상품, 맞춤항공권,최근검색이력]");
-        next();
+        builder.Prompts.choice(
+            session, 
+            " 다음의 항목들 중 선택해 주시면 최선을 다해 도와드리겠습니다. ", ["스케줄조회", "이벤트", "특가상품", "맞춤항공권","최근검색이력"],
+            { listStyle: builder.ListStyle.button });
     },
     function(session, results){
-        session.userData.Type = results.response.entity;
+        
+        session.userData.Type = getLuisIntent(results.response.entity);
+        
         if(session.userData.Type == "스케줄조회") {
             session.beginDialog('스케줄조회Dialog');
 
@@ -107,7 +111,7 @@ bot.dialog('/', [
 
             session.beginDialog('이벤트Dialog');
         } 
-        else if(session.userData.Type == "특가상품"){
+        else if(session.userData.Type == "특가상품" || session.userData.Type == "특가"){
 
             session.beginDialog('특가Dialog');
         } 
