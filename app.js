@@ -464,7 +464,7 @@ bot.dialog('fit', [
             else if ( count == 1 ){
                 let messageWithCarouselOfCards = [ //카드로 받아서
                     new builder.HeroCard(session)
-                    .title('목적지 : ' + data.notify.depart[0] + ' , 테마 : ' + data.notify.theme[0])
+                    .title('출발지 : ' + data.notify.depart[0] + ' , 테마 : ' + data.notify.theme[0])
                     .subtitle('기간 : ' + data.notify.period[0] + '일 , 예산 : ' + data.notify.asset[0] + '만원')
                     .images([
                         builder.CardImage.create(session, getImgLink(data.notify.theme[0]))
@@ -483,7 +483,7 @@ bot.dialog('fit', [
             else if ( count == 2 ){
                 let messageWithCarouselOfCards = [ //카드로 받아서
                     new builder.HeroCard(session)
-                        .title('목적지 : ' + data.notify.depart[0] + ' , 테마 : ' + data.notify.theme[0])
+                        .title('출발지 : ' + data.notify.depart[0] + ' , 테마 : ' + data.notify.theme[0])
                         .subtitle('기간 : ' + data.notify.period[0] + '일 , 예산 : ' + data.notify.asset[0] + '만원')
                         .images([
                             builder.CardImage.create(session, getImgLink(data.notify.theme[0]))
@@ -492,7 +492,7 @@ bot.dialog('fit', [
                             builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
                         ]),
                         new builder.HeroCard(session)
-                        .title('목적지 : ' + data.notify.depart[1] + ' , 테마 : ' + data.notify.theme[1])
+                        .title('출발지 : ' + data.notify.depart[1] + ' , 테마 : ' + data.notify.theme[1])
                         .subtitle('기간 : ' + data.notify.period[1] + '일 , 예산 : ' + data.notify.asset[1] + '만원')
                         .images([
                             builder.CardImage.create(session, getImgLink(data.notify.theme[1]))
@@ -511,7 +511,7 @@ bot.dialog('fit', [
             else if ( count >= 3 ){
                 let messageWithCarouselOfCards = [ //카드로 받아서
                     new builder.HeroCard(session)
-                        .title('목적지 : ' + data.notify.depart[count-3] + ' , 테마 : ' + data.notify.theme[count-3])
+                        .title('출발지 : ' + data.notify.depart[count-3] + ' , 테마 : ' + data.notify.theme[count-3])
                         .subtitle('기간 : ' + data.notify.period[count-3] + '일 , 예산 : ' + data.notify.asset[count-3] + '만원')
                         .images([
                                 builder.CardImage.create(session, getImgLink(data.notify.theme[count-3]))
@@ -520,7 +520,7 @@ bot.dialog('fit', [
                                 builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
                             ]),
                             new builder.HeroCard(session)
-                            .title('목적지 : ' + data.notify.depart[count-2] + ' , 테마 : ' + data.notify.theme[count-2])
+                            .title('출발지 : ' + data.notify.depart[count-2] + ' , 테마 : ' + data.notify.theme[count-2])
                             .subtitle('기간 : ' + data.notify.period[count-2] + '일 , 예산 : ' + data.notify.asset[count-2] + '만원')
                             .images([
                                 builder.CardImage.create(session, getImgLink(data.notify.theme[count-2]))
@@ -529,7 +529,7 @@ bot.dialog('fit', [
                                 builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
                             ]),
                             new builder.HeroCard(session)
-                            .title('목적지 : ' + data.notify.depart[count-1] + ' , 테마 : ' + data.notify.theme[count-1])
+                            .title('출발지 : ' + data.notify.depart[count-1] + ' , 테마 : ' + data.notify.theme[count-1])
                             .subtitle('기간 : ' + data.notify.period[count-1] + '일 , 예산 : ' + data.notify.asset[count-1] + '만원')
                             .images([
                                 builder.CardImage.create(session, getImgLink(data.notify.theme[count-1]))
