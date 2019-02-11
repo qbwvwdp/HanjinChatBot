@@ -94,14 +94,14 @@ var TempID = "TEST-ID005";
 bot.dialog('/', [
     function (session) {        
         session.send('안녕하세요. 제이드(Jaid)입니다.');        
-        builder.Prompts.choice(
+        builder.Prompts.text(
             session, 
-            " 다음의 항목들 중 선택해 주시면 최선을 다해 도와드리겠습니다. ", ["스케줄조회", "이벤트", "특가상품", "맞춤항공권","최근검색이력"],
-            { listStyle: builder.ListStyle.button });
+            " 다음의 항목들 중 선택해 주시면 최선을 다해 도와드리겠습니다. , [스케줄조회, 이벤트, 특가상품, 맞춤항공권,최근검색이력 "
+            );
     },
     function(session, results){
         var tmpLuis = LoadInfo.getLuisIntent(results.response.entity);
-        session.userData.Type = results.response.entity;
+        //session.userData.Type = results.response.entity;
         console.log("********************************");
         console.dir(tmpLuis);
         console.log(tmpLuis.topScoringIntent.intent);
@@ -109,15 +109,15 @@ bot.dialog('/', [
         console.log("********************************");
 
         
-        if(session.userData.Type == "스케줄조회" || tmpLuis.topScoringIntent.intent == "스케줄조회") {
+        if(tmpLuis.topScoringIntent.intent == "스케줄조회" ) {
             session.beginDialog('스케줄조회Dialog');
 
         } 
-        else if(session.userData.Type == "이벤트"|| tmpLuis.topScoringIntent.intent == "이벤트"){
+        else if(tmpLuis.topScoringIntent.intent == "이벤트"){
 
             session.beginDialog('이벤트Dialog');
         } 
-        else if(session.userData.Type == "특가상품" || tmpLuis.topScoringIntent.intent == "특가"){
+        else if(tmpLuis.topScoringIntent.intent == "특가" ){
 
             session.beginDialog('특가Dialog');
         } 
