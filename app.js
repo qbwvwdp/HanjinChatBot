@@ -103,20 +103,21 @@ bot.dialog('/', [
         var tmpLuis = LoadInfo.getLuisIntent(results.response.entity);
         session.userData.Type = results.response.entity;
         console.log("********************************");
-        console.log(`TEMP Luis : + ${tmpLuis}`);
+        console.dir(tmpLuis);
+        console.log(tmpLuis.topScoringIntent.intent);
         console.log("session.userData.Type : "+ session.userData.Type);
         console.log("********************************");
 
         
-        if(session.userData.Type == "스케줄조회" || tmpLuis == "스케줄조회") {
+        if(session.userData.Type == "스케줄조회" || tmpLuis.topScoringIntent.intent == "스케줄조회") {
             session.beginDialog('스케줄조회Dialog');
 
         } 
-        else if(session.userData.Type == "이벤트"|| tmpLuis == "이벤트"){
+        else if(session.userData.Type == "이벤트"|| tmpLuis.topScoringIntent.intent == "이벤트"){
 
             session.beginDialog('이벤트Dialog');
         } 
-        else if(session.userData.Type == "특가상품" || tmpLuis == "특가"){
+        else if(session.userData.Type == "특가상품" || tmpLuis.topScoringIntent.intent == "특가"){
 
             session.beginDialog('특가Dialog');
         } 
