@@ -100,9 +100,10 @@ bot.dialog('/', [
             );
     },
     function(session, results){
-        var tmpLuis = LoadInfo.getLuisIntent(results.response.entity);
-        //session.userData.Type = results.response;
+        var tmpLuis = LoadInfo.getLuisIntent(results.response);
+        //session.userData.Type = results.response.entity;
         console.log("********************************");
+        console.log(results.response);
         console.dir(tmpLuis);
         console.log(tmpLuis.topScoringIntent.intent);
         console.log("session.userData.Type : "+ session.userData.Type);
