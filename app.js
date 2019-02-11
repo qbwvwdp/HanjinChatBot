@@ -103,7 +103,7 @@ bot.dialog('/', [
         var tmpLuis = LoadInfo.getLuisIntent(results.response.entity);
         session.userData.Type = results.response.entity;
         console.log("********************************");
-        console.log("TEMP Luis : "+ tmpLuis);
+        console.log(`TEMP Luis : + ${tmpLuis}`);
         console.log("session.userData.Type : "+ session.userData.Type);
         console.log("********************************");
 
