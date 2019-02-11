@@ -284,7 +284,7 @@ bot.dialog('tnum', [
                             'actions': [
                                 {
                                     'type': 'Action.Submit',
-                                    'title': 'Search',
+                                    'title': '검색',
                                     'speak': '<s>Search</s>',
                                     'data': {
                                         'type': 'hotelSearch'
@@ -360,7 +360,7 @@ bot.dialog('recently', [
             var count = Object.values(data.schedule.depart).length;
             if(count == 0){
                 session.send("최근 조회 내역이 없습니다.\n처음으로 돌아갑니다.")
-                session.endDialog();
+                session.beginDialog('/');
             }
             else if ( count == 1 ){
                 let messageWithCarouselOfCards = [ //카드로 받아서
@@ -379,7 +379,7 @@ bot.dialog('recently', [
                     .attachments(messageWithCarouselOfCards);
         
                 session.send(reference);
-                session.endDialog('처음으로 돌아갑니다.');
+                session.beginDialog('/');
             }
             else if(count == 2){
                 let messageWithCarouselOfCards = [ //카드로 받아서
@@ -408,7 +408,7 @@ bot.dialog('recently', [
                     .attachments(messageWithCarouselOfCards);
         
                 session.send(reference);
-                session.endDialog('처음으로 돌아갑니다.');
+                session.beginDialog('/');
             }
             else if (count => 3){
                 let messageWithCarouselOfCards = [ //카드로 받아서
@@ -446,7 +446,7 @@ bot.dialog('recently', [
                     .attachments(messageWithCarouselOfCards);
         
                 session.send(reference);
-                session.endDialog('처음으로 돌아갑니다.');
+                session.beginDialog('/');
             }
         })
     }
@@ -462,7 +462,7 @@ bot.dialog('fit', [
             var count = Object.values(data.notify.depart).length;
             if(count == 0){
                 session.send("최근 조회 내역이 없습니다.\n처음으로 돌아갑니다.")
-                session.endDialog();
+                session.beginDialog('/');
             }
             else if ( count == 1 ){
                 let messageWithCarouselOfCards = [ //카드로 받아서
@@ -481,7 +481,7 @@ bot.dialog('fit', [
                         .attachments(messageWithCarouselOfCards);
 
                     session.send(reference);
-                    session.endDialog('처음으로 돌아갑니다.')
+                    session.beginDialog('/');
                 }
             else if ( count == 2 ){
                 let messageWithCarouselOfCards = [ //카드로 받아서
@@ -509,7 +509,7 @@ bot.dialog('fit', [
                     .attachments(messageWithCarouselOfCards);
 
                 session.send(reference);
-                session.endDialog('처음으로 돌아갑니다.')
+                session.beginDialog('/');
                     }
             else if ( count >= 3 ){
                 let messageWithCarouselOfCards = [ //카드로 받아서
@@ -546,7 +546,7 @@ bot.dialog('fit', [
                     .attachments(messageWithCarouselOfCards);
 
                 session.send(reference);
-                session.endDialog('처음으로 돌아갑니다.')
+                session.beginDialog('/');
                         }
                     }
                 )
@@ -586,34 +586,22 @@ bot.dialog('weeksche', [//여기에 matching됨
                     .attachments(cards);
 
                 session.send(reply);
+                session.beginDialog('recomnd');
             }             
     ])
 
 
-bot.dialog('print', [
-    function (session) {
-        session.send({
-            attachments : [{
-                contentType: "image/png",
-                contentUrl: "https://imgur.com/YLgMrUD.png"
-
-            }]
-        });
-        session.beginDialog('recomnd');
-        
-    }
-])
 
 bot.dialog ('recomnd', [
     function (session) {
         builder.Prompts.choice(
             session,
-            "[초특가알림] 고객님께 추천하는 특가상품이 있는데 보시겠습니까?  ", ["볼래요", "괜찮아요"],
+            "[초특가알림] 고객님께 추천하는 특가상품이 있는데 보시겠습니까?  ", ["예", "아니오"],
             { listStyle: builder.ListStyle.button });
     },
     function(session, results) {
         session.userData.text = results.response.entity;
-        if(session.userData.text == '볼래요'){
+        if(session.userData.text == '예'){
            var rand = Math.floor(Math.random() * 7);
            if(rand==1){
                 let cards = [ //카드로 받아서
@@ -644,6 +632,7 @@ bot.dialog ('recomnd', [
                     .attachmentLayout(builder.AttachmentLayout.carousel)
                     .attachments(cards);
                 session.send(reply);
+                session.beginDialog('/');
             }
             else if(rand==2){
                 let cards = [ //카드로 받아서
@@ -675,6 +664,7 @@ bot.dialog ('recomnd', [
                     .attachments(cards);
 
                 session.send(reply);
+                session.beginDialog('/');
             }
 
             else if(rand==3){
@@ -708,6 +698,7 @@ bot.dialog ('recomnd', [
                     .attachments(cards);
 
                 session.send(reply);
+                session.beginDialog('/');
             }
             else if(rand==4){
 
@@ -741,6 +732,7 @@ bot.dialog ('recomnd', [
                     .attachments(cards);
 
                 session.send(reply);
+                session.beginDialog('/');
             }
            
            else{
@@ -774,10 +766,11 @@ bot.dialog ('recomnd', [
                 .attachments(cards);
 
             session.send(reply);
+            session.beginDialog('/');
            }
         }
         else {
-          session.endDialog('"처음"을 입력하시면 처음으로 돌아갑니다.');
+          session.beginDialog('/');
         }
     }  
 ])
@@ -790,6 +783,7 @@ bot.dialog('출도착조회Dialog', //여기에 matching됨
                 contentUrl: "https://postfiles.pstatic.net/MjAxOTAxMjlfNjEg/MDAxNTQ4NzIyNDUxMzA3.rjebs_uxmNX35B_UsZjKsfE6TVGO4H4SAnDcN_cfVSgg.bZIU2ms4TFXULFQU3ecb-WHWaS941w3nP5LHnxHVwaAg.PNG.fdclub123/출도착조회.PNG?type=w773"
             }]
         });
+        session.beginDialog('/');
     } 
 ).triggerAction({ 
     matches: '출도착조회' 
@@ -803,7 +797,7 @@ bot.dialog('pass', //여기에 matching됨
                 contentUrl: "https://postfiles.pstatic.net/MjAxOTAxMjlfMTcg/MDAxNTQ4NzIyNzI1MjE1.2JeiOZajUx1_TuQNo6FqmJBrZXiIm2gTJsryje2psp0g.sXBelwjD6IbwZf2XPutrz07As7S4oMQNnn0PiUtk69Mg.PNG.fdclub123/예약조회.PNG?type=w773"
             }]
         });
-        
+        session.beginDialog('/');
     } 
 ).triggerAction({ 
     matches: ['예약 확인', '예약조회']
@@ -821,6 +815,7 @@ bot.dialog('이벤트Dialog', [//여기에 matching됨
             if(session.userData.text == '예'){
                // opens the url in the default browser 
                opn('https://www.jinair.com/promotion/eventList');
+               session.beginDialog('/');
             }
             else{
                 session.endDialog();
@@ -830,6 +825,27 @@ bot.dialog('이벤트Dialog', [//여기에 matching됨
     ]).triggerAction({ 
     matches: '이벤트'
 }); 
+
+bot.dialog('next_process', [
+    function(session){
+        builder.Prompts.choice(
+            session,
+            "다른 특가상품을 보여드릴까요?  ", ["예", "아니오"],
+            { listStyle: builder.ListStyle.button });
+    },
+    function(session, results) {
+        session.userData.text = results.response.entity;
+        //console.log(`entity: ${results.response.entity}`);
+        
+        if(session.userData.text == '예'){
+            session.beginDialog('특가Dialog');
+        }
+        else if(session.userData.text == '아니오'){
+            session.beginDialog('/');
+        }
+    }
+])
+
 
 bot.dialog('특가Dialog', [//여기에 matching됨
     function (session) {        
@@ -886,6 +902,7 @@ bot.dialog('특가Dialog', [//여기에 matching됨
                     .attachments(cards);
 
                 session.send(reply);
+                session.beginDialog('next_process');
 
             }else if(session.userData.month == '4월 ~ 6월'){
                 let cards = [ //카드로 받아서
@@ -939,6 +956,7 @@ bot.dialog('특가Dialog', [//여기에 matching됨
                     .attachments(cards);
 
                 session.send(reply);
+                session.beginDialog('next_process');
 
             } else if(session.userData.month == '7월 ~ 9월'){
                 let cards = [ //카드로 받아서
@@ -992,6 +1010,7 @@ bot.dialog('특가Dialog', [//여기에 matching됨
                     .attachments(cards);
 
                 session.send(reply);
+                session.beginDialog('next_process');
 
             }else if(session.userData.month == '10월 ~ 12월'){
                 let cards = [ //카드로 받아서
@@ -1045,6 +1064,7 @@ bot.dialog('특가Dialog', [//여기에 matching됨
                     .attachments(cards);
 
                 session.send(reply);
+                session.beginDialog('next_process');
 
             }else{
                 session.endDialog();
@@ -1168,12 +1188,12 @@ bot.dialog('맞춤항공권Dialog',[
                                 },
                                 {
                                     'type': 'TextBlock',
-                                    'text': '예산을 입력해주세요 :'
+                                    'text': '예산을 입력해주세요 ( 단위 KRW10,000 ):'
                                 },
                                 {
                                     'type': 'Input.Text',
                                     'id': 'budget',
-                                    'speak': '<s>예산을 입력해주세요 ( 단위 KRW10,000 ):</s>',
+                                    'speak': '<s>예산을 입력해주세요 :</s>',
                                     'default' : '1'
                                 },
                                 {
@@ -1266,6 +1286,9 @@ bot.dialog('맞춤항공권Dialog',[
 
 bot.dialog('hotels-search', [(session, value, next)=>{
     console.log(value);
+    session.send('해당 내용이 없습니다.');
+    session.message.value = null;
+    session.beginDialog('맞춤항공권Dialog');
     }
 ]);
 
@@ -1273,6 +1296,7 @@ bot.dialog('save-info', [(session, value, next)=>{
     console.log(value);
     log.FuncUpsert(['notify',value.destination,value.budget,value.period,value.theme],TempID);
     session.send("선택하신 내용으로 알림 설정 완료 되었습니다.");
+    session.message.value = null;
     session.beginDialog('/');
     }
 ]);
