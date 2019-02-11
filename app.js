@@ -551,9 +551,7 @@ bot.dialog('fit', [
                     }
                 )
             } 
-]).triggerAction({
-    matches: '맞춤항공권 예약 현황'
-});
+])
 
 bot.dialog('weeksche', [//여기에 matching됨
         function (session, results) {
