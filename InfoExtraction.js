@@ -22,7 +22,7 @@ function getLuisIntent(utterance) {
     // endpoint URL
     var endpoint =
        // "https://westeurope.api.cognitive.microsoft.com/luis/v2.0/apps/";
-        "https://westeurope.api.cognitive.microsoft.com/luis/v2.0/apps/bdafc1d1-0822-4eee-8853-458a76c6f935?verbose=true&timezoneOffset=60&subscription-key=41482f33437b46e9bdb081bfbdf29e30&q="
+        "https://westeurope.api.cognitive.microsoft.com/luis/v2.0/apps/bdafc1d1-0822-4eee-8853-458a76c6f935?verbose=true&timezoneOffset=60&subscription-key=41482f33437b46e9bdb081bfbdf29e30&q"
     
     // Set the LUIS_APP_ID environment variable 
     // to df67dcdb-c37d-46af-88e1-8b97951ca1c2, which is the ID
