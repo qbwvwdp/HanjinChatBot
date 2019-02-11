@@ -101,7 +101,7 @@ bot.dialog('/', [
     },
     function(session, results){
         var tmpLuis = LoadInfo.getLuisIntent(results.response.entity);
-        //session.userData.Type = results.response.entity;
+        //session.userData.Type = results.response;
         console.log("********************************");
         console.dir(tmpLuis);
         console.log(tmpLuis.topScoringIntent.intent);
