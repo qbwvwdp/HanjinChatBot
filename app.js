@@ -92,9 +92,10 @@ bot.on('conversationUpdate', function (message) {
 var TempID = "TEST-ID005";
 // (수정)
 bot.dialog('/', [
-    function (session) {        
+    function (session,results,next) {        
         session.send('안녕하세요. 제이드(Jaid)입니다.');        
         builder.Prompts.text(session, " 다음의 항목들 중 선택해 주시면 최선을 다해 도와드리겠습니다. [스케줄조회, 이벤트, 특가상품, 맞춤항공권,최근검색이력]");
+        next();
     },
     function(session, results){
         session.userData.Type = results.response.entity;
