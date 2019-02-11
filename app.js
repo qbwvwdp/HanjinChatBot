@@ -96,7 +96,7 @@ bot.dialog('/', [
         session.send('안녕하세요. 제이드(Jaid)입니다.');        
         builder.Prompts.choice(
             session, 
-            " 다음의 항목들 중 선택해 주시면 최선을 다해 도와드리겠습니다. ", ["스케줄조회", "출도착조회", "이벤트", "특가상품", "맞춤항공권","최근검색이력"],
+            " 다음의 항목들 중 선택해 주시면 최선을 다해 도와드리겠습니다. ", ["스케줄조회", "이벤트", "특가상품", "맞춤항공권","최근검색이력"],
             { listStyle: builder.ListStyle.button });
     },
     function(session, results){
@@ -104,9 +104,6 @@ bot.dialog('/', [
         if(session.userData.Type == "스케줄조회") {
             session.beginDialog('스케줄조회Dialog');
 
-        } else if(session.userData.Type == "출도착조회"){
-
-            session.beginDialog('출도착조회Dialog');
         } 
         else if(session.userData.Type == "이벤트"){
 
@@ -770,33 +767,33 @@ bot.dialog ('recomnd', [
     }  
 ])
 
-bot.dialog('출도착조회Dialog', //여기에 matching됨
-    (session) => { 
-        session.send({
-            attachments : [{
-                contentType: "image/jpeg",
-                contentUrl: "https://postfiles.pstatic.net/MjAxOTAxMjlfNjEg/MDAxNTQ4NzIyNDUxMzA3.rjebs_uxmNX35B_UsZjKsfE6TVGO4H4SAnDcN_cfVSgg.bZIU2ms4TFXULFQU3ecb-WHWaS941w3nP5LHnxHVwaAg.PNG.fdclub123/출도착조회.PNG?type=w773"
-            }]
-        });
-        session.beginDialog('/');
-    } 
-).triggerAction({ 
-    matches: '출도착조회' 
-}); 
 
 bot.dialog('pass', //여기에 matching됨
     (session) => { 
-        session.send({
-            attachments : [{
-                contentType: "image/jpeg",
-                contentUrl: "https://postfiles.pstatic.net/MjAxOTAxMjlfMTcg/MDAxNTQ4NzIyNzI1MjE1.2JeiOZajUx1_TuQNo6FqmJBrZXiIm2gTJsryje2psp0g.sXBelwjD6IbwZf2XPutrz07As7S4oMQNnn0PiUtk69Mg.PNG.fdclub123/예약조회.PNG?type=w773"
-            }]
-        });
-        session.beginDialog('/');
-    } 
-).triggerAction({ 
-    matches: ['예약 확인', '예약조회']
-}); 
+        let cards = [ //카드로 받아서
+            new builder.HeroCard(session)
+            //.title('1~3월 출발편 대상 특가 프로모션')
+            //.subtitle('막내가 사장실 구경가는 프로모션')
+            //.text('#막내야_우리는_ #수하물도_주고 #기내식도_주는데 #이_가격은_어디서_왔어?^^')
+            .images([
+                builder.CardImage.create(session, 'https://postfiles.pstatic.net/MjAxOTAxMjlfMTcg/MDAxNTQ4NzIyNzI1MjE1.2JeiOZajUx1_TuQNo6FqmJBrZXiIm2gTJsryje2psp0g.sXBelwjD6IbwZf2XPutrz07As7S4oMQNnn0PiUtk69Mg.PNG.fdclub123/예약조회.PNG?type=w773')
+            ])
+            //.buttons([
+                //builder.CardAction.openUrl(session, 'https://www.jinair.com/promotion/eventView?evntSeq=10784', '자세히 보기')
+                //])
+            ];
+            
+            var reply = new builder.Message(session) //카드로 응답한다
+            .attachmentLayout(builder.AttachmentLayout.carousel)
+            .attachments(cards);
+            session.send(reply);
+            session.beginDialog('/');
+        }
+        ).triggerAction({ 
+            matches: ['예약 확인', '예약조회']
+    }); 
+
+
 
 bot.dialog('이벤트Dialog', [//여기에 matching됨
     function (session) {        
