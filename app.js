@@ -300,11 +300,11 @@ bot.dialog('tnum', [
 ])
 bot.dialog('최근검색이력Dialog', [
     (session) => {
-        builder.Prompts.choice(session, " 본인의 최근 항공 조회 내역 혹은 맞춤항공권 예약 현황을 보시겠습니까? ", ["최근 조회 내역", "맞춤항공권 예약 현황"], { listStyle: builder.ListStyle.button});
+        builder.Prompts.choice(session, " 본인의 최근 항공 스케줄 조회 내역 혹은 맞춤항공권 예약 현황을 보시겠습니까? ", ["최근 스케줄 조회 내역", "맞춤항공권 예약 현황"], { listStyle: builder.ListStyle.button});
     },
     function (session, results) {
         session.userData.text = results.response.entity;
-        if(session.userData.text == '최근 조회 내역') {
+        if(session.userData.text == '최근 스케줄 조회 내역') {
             session.beginDialog('recently');
         }
         else if(session.userData.text == '맞춤항공권 예약 현황') {
@@ -348,6 +348,7 @@ bot.dialog('recently', [
     (session)=>{
         log.FindUserFunc(TempID,(param)=>{
             data = JSON.parse(param);
+            var count = 0;
             while(1)
             {
                 if(data.schedule.depart[count]===undefined || data.schedule.depart[count]===null)
@@ -357,7 +358,7 @@ bot.dialog('recently', [
                 count++;
             }
             if(count == 0){
-                session.send("최근 조회 내역이 없습니다.\n처음으로 돌아갑니다.")
+                session.send("맞춤항공권 예약 내역이 없습니다.\n처음으로 돌아갑니다.")
                 session.beginDialog('/');
             }
             else if ( count == 1 ){
@@ -466,9 +467,8 @@ bot.dialog('fit', [
                 }
                 count++;
             }
-            session.send("count : ",count);
             if(count == 0){
-                session.send("최근 조회 내역이 없습니다.\n처음으로 돌아갑니다.")
+                session.send("최근 스케줄 조회 내역이 없습니다.\n처음으로 돌아갑니다.")
                 session.beginDialog('/');
             }
             else if ( count == 1 ){
