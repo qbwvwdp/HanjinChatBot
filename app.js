@@ -100,18 +100,18 @@ bot.dialog('/', [
             { listStyle: builder.ListStyle.button });
     },
     function(session, results){
+        var tmpLuis = LoadInfo.getLuisIntent(results.response.entity);
+        session.userData.Type = results.response.entity;
         
-        session.userData.Type = LoadInfo.getLuisIntent(results.response.entity);
-        
-        if(session.userData.Type == "스케줄조회") {
+        if(session.userData.Type == "스케줄조회" || tmpLuis == "스케줄조회") {
             session.beginDialog('스케줄조회Dialog');
 
         } 
-        else if(session.userData.Type == "이벤트"){
+        else if(session.userData.Type == "이벤트"|| tmpLuis == "이벤트"){
 
             session.beginDialog('이벤트Dialog');
         } 
-        else if(session.userData.Type == "특가상품" || session.userData.Type == "특가"){
+        else if(session.userData.Type == "특가상품" || tmpLuis == "특가"){
 
             session.beginDialog('특가Dialog');
         } 
