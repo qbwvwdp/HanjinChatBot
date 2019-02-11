@@ -101,7 +101,7 @@ bot.dialog('/', [
     },
     function(session, results){
         
-        session.userData.Type = getLuisIntent(results.response.entity);
+        session.userData.Type = LoadInfo.getLuisIntent(results.response.entity);
         
         if(session.userData.Type == "스케줄조회") {
             session.beginDialog('스케줄조회Dialog');
