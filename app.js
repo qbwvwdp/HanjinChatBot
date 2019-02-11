@@ -810,28 +810,42 @@ bot.dialog('pass', //여기에 matching됨
 
 
 
-bot.dialog('이벤트Dialog', [//여기에 matching됨
-    function (session) {        
-        builder.Prompts.choice(
-            session, 
-            " 이벤트에 대한 내용으로 이동하겠습니까? ", ["예", "아니요"],
-            { listStyle: builder.ListStyle.button });
-        },
-        function(session, results) {
-            session.userData.text = results.response.entity;
-            if(session.userData.text == '예'){
-               // opens the url in the default browser 
-               opn('https://www.jinair.com/promotion/eventList');
-               session.beginDialog('/');
-            }
-            else{
-                session.endDialog();
-                session.beginDialog('/')
-            }
-        }          
-    ]).triggerAction({ 
-    matches: '이벤트'
-}); 
+    bot.dialog('이벤트Dialog', [//여기에 matching됨
+        function (session) {        
+            builder.Prompts.choice(
+                session, 
+                " 이벤트에 대한 내용으로 이동하겠습니까? ", ["예", "아니요"],
+                { listStyle: builder.ListStyle.button });
+            },
+            function(session, results) {
+                session.userData.text = results.response.entity;
+                if(session.userData.text == '예'){
+                    let cards = [ //카드로 받아서
+                        new builder.HeroCard(session)
+                        .title('이벤트 페이지로 이동합니다.')
+                        .subtitle('방문해서 다양한 이벤트를 만나보세요.')
+                        .images([
+                            builder.CardImage.create(session, 'https://imgur.com/tyaxeTP.png')
+                        ])
+                        .buttons([
+                            builder.CardAction.openUrl(session, 'https://www.jinair.com/promotion/eventView?evntSeq=10784', '이동하기')
+                        ])
+                    ];
+                    
+                    var reply = new builder.Message(session) //카드로 응답한다
+                        .attachmentLayout(builder.AttachmentLayout.carousel)
+                        .attachments(cards);
+                   session.send(reply);
+                   session.beginDialog('/');
+                }
+                else{
+                    session.endDialog();
+                    session.beginDialog('/')
+                }
+            }          
+        ]).triggerAction({ 
+        matches: '이벤트'
+    }); 
 
 bot.dialog('next_process', [
     function(session){
