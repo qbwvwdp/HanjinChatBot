@@ -303,7 +303,7 @@ bot.dialog('tnum', [
 ])
 bot.dialog('최근검색이력Dialog', [
     function (session) {
-        session.beginDialog('talk');
+        builder.Prompts.choice(session, " 본인의 최근 항공 조회 내역 혹은 맞춤항공권 예약 현황을 보시겠습니까? ", ["최근 조회 내역", "맞춤항공권 예약 현황"], { listStyle: builder.ListStyle.button});
     },
     function (session, results) {
         session.userData.text = results.response.entity;
@@ -313,12 +313,6 @@ bot.dialog('최근검색이력Dialog', [
         else if(session.userData.text == '맞춤항공권 예약 현황') {
             session.beginDialog('fit');
         }
-    }
-])
-
-bot.dialog('talk', [
-    function (session) {
-        builder.Prompts.choice(session, " 본인의 최근 항공 조회 내역 혹은 맞춤항공권 예약 현황을 보시겠습니까? ", ["최근 조회 내역", "맞춤항공권 예약 현황"], { listStyle: builder.ListStyle.button});
     }
 ])
 
