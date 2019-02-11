@@ -96,7 +96,7 @@ bot.dialog('/', [
         session.send('안녕하세요. 제이드(Jaid)입니다.');        
         builder.Prompts.choice(
             session, 
-            " 다음의 항목들 중 선택해 주시면 최선을 다해 도와드리겠습니다. ", ["스케줄조회", "출도착조회", "이벤트", "특가상품", "맞춤항공권"],
+            " 다음의 항목들 중 선택해 주시면 최선을 다해 도와드리겠습니다. ", ["스케줄조회", "출도착조회", "이벤트", "특가상품", "맞춤항공권","최근검색이력"],
             { listStyle: builder.ListStyle.button });
     },
     function(session, results){
@@ -119,6 +119,9 @@ bot.dialog('/', [
         else if(session.userData.Type == "맞춤항공권"){
 
             session.beginDialog('맞춤항공권Dialog');
+        }
+        else if(session.userData.Type == '최근검색이력') {
+            session.beginDialog('최근검색이력Dialog');
         }else {
 
             session.endDialog();
@@ -298,6 +301,259 @@ bot.dialog('tnum', [
         session.send(msg);
     }
 ])
+bot.dialog('최근검색이력Dialog', [
+    function (session) {
+        session.beginDialog('talk');
+    },
+    function (session, results) {
+        session.userData.text = results.response.entity;
+        if(session.userData.text == '최근 조회 내역') {
+            session.beginDialog('recently');
+        }
+        else if(session.userData.text == '맞춤항공권 내역') {
+            session.beginDialog('fit');
+        }
+    }
+])
+
+bot.dialog('talk', [
+    function (session) {
+        builder.Prompts.choice(session, " 본인의 최근 조회 내역을 보시겠습니까?\n 또는 맞춤항공권 내역을 보시겠습니까? ", ["최근 조회 내역", "맞춤항공권 내역"], { listStyle: builder.ListStyle.button});
+    }
+])
+
+var charge = '150000';
+function getImgLink(Name){
+    if(Name == "다 낭"){
+        return "https://imgur.com/UGgZ03x.jpg";
+    }
+    else if(Name == "도 쿄"){
+        return "https://imgur.com/mVQ3k77.jpg";
+    }
+    else if(Name == "제 주"){
+        return "https://imgur.com/f6u3UC2.png";
+    }
+    else if(Name == "쇼핑"){
+        return "https://imgur.com/nrhVLLa.jpg";
+    }
+    else if(Name == "친구"){
+        return "https://imgur.com/KM6khrz.jpg";
+    }
+    else if(Name == "해변"){
+        return "https://imgur.com/vH9jcHk.jpg";
+    }
+    else if(Name == "도시"){
+        return "https://imgur.com/ZYe76sk.jpg";
+    }
+    else if(Name == "미식"){
+        return "https://imgur.com/2iqnyoE.jpg";
+    }
+
+}
+
+
+bot.dialog('recently', [
+    // 최근 조회 내역(출발지, 도착지, 출발날짜, 요금)
+    (session)=>{
+        log.FindUserFunc(TempID,(param)=>{
+            data = JSON.parse(param);
+            var count = Object.values(data.schedule.depart).length;
+            if(count == 0){
+                session.send("최근 조회 내역이 없습니다.\n처음으로 돌아갑니다.")
+                session.endDialog();
+            }
+            else if ( count == 1 ){
+                let messageWithCarouselOfCards = [ //카드로 받아서
+                    new builder.HeroCard(session)
+                    .title('출발지 : ' + data.schedule.depart[0] + ' , 도착지 : ' + data.schedule.arrive[0])
+                    .subtitle('출발날짜 : ' + data.schedule.date[0] + ' , 요금 : ' + charge + '원')
+                    .images([
+                        builder.CardImage.create(session, getImgLink(data.schedule.arrive[0]))
+                    ])
+                    .buttons([
+                        builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                    ])
+                ];
+                var reference = new builder.Message(session) //카드로 응답한다
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments(messageWithCarouselOfCards);
+        
+                session.send(reference);
+                session.endDialog('처음으로 돌아갑니다.');
+            }
+            else if(count == 2){
+                let messageWithCarouselOfCards = [ //카드로 받아서
+                    new builder.HeroCard(session)
+                    .title('출발지 : ' + data.schedule.depart[0] + ' , 도착지 : ' + data.schedule.arrive[0])
+                    .subtitle('출발날짜 : ' + data.schedule.date[0] + ' , 요금 : ' + charge + '원')
+                    .images([
+                        builder.CardImage.create(session, getImgLink(data.schedule.arrive[0]))
+                    ])
+                    .buttons([
+                        builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                    ]),
+                    
+                    new builder.HeroCard(session)
+                    .title('출발지 : ' + data.schedule.depart[1] + ' , 도착지 : ' + data.schedule.arrive[1])
+                    .subtitle('출발날짜 : ' + data.schedule.date[1] + ' , 요금 : ' + charge + '원')
+                    .images([
+                        builder.CardImage.create(session, getImgLink(data.schedule.arrive[1]))
+                    ])
+                    .buttons([
+                        builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                    ])
+                ];
+                var reference = new builder.Message(session) //카드로 응답한다
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments(messageWithCarouselOfCards);
+        
+                session.send(reference);
+                session.endDialog('처음으로 돌아갑니다.');
+            }
+            else if (count => 3){
+                let messageWithCarouselOfCards = [ //카드로 받아서
+                    new builder.HeroCard(session)
+                    .title('출발지 : ' + data.schedule.depart[count-3] + ' , 도착지 : ' + data.schedule.arrive[count-3])
+                    .subtitle('출발날짜 : ' + data.schedule.date[count-3] + ' , 요금 : ' + charge + '원')
+                    .images([
+                        builder.CardImage.create(session, getImgLink(data.schedule.arrive[count-3]))
+                    ])
+                    .buttons([
+                        builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                    ]),
+                    
+                    new builder.HeroCard(session)
+                    .title('출발지 : ' + data.schedule.depart[count-2] + ' , 도착지 : ' + data.schedule.arrive[count-2])
+                    .subtitle('출발날짜 : ' + data.schedule.date[count-2] + ' , 요금 : ' + charge + '원')
+                    .images([
+                        builder.CardImage.create(session, getImgLink(data.schedule.arrive[count-2]))
+                    ])
+                    .buttons([
+                        builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                    ]),
+                    new builder.HeroCard(session)
+                    .title('출발지 : ' + data.schedule.depart[count-1] + ' , 도착지 : ' + data.schedule.arrive[count-1])
+                    .subtitle('출발날짜 : ' + data.schedule.date[count-1] + ' , 요금 : ' + charge + '원')
+                    .images([
+                        builder.CardImage.create(session, getImgLink(data.schedule.arrive[count-1]))
+                    ])
+                    .buttons([
+                        builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                    ])
+                ];
+                var reference = new builder.Message(session) //카드로 응답한다
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments(messageWithCarouselOfCards);
+        
+                session.send(reference);
+                session.endDialog('처음으로 돌아갑니다.');
+            }
+        })
+    }
+]).triggerAction({
+    matches: '최근 조회'
+});
+
+bot.dialog('fit', [
+    // 맞춤 항공권 내역(목적지, 기간, 테마, 예산)
+    function (session) {
+        log.FindUserFunc(TempID,(param)=>{
+            data = JSON.parse(param);
+            var count = Object.values(data.notify.depart).length;
+            if(count == 0){
+                session.send("최근 조회 내역이 없습니다.\n처음으로 돌아갑니다.")
+                session.endDialog();
+            }
+            else if ( count == 1 ){
+                let messageWithCarouselOfCards = [ //카드로 받아서
+                    new builder.HeroCard(session)
+                    .title('목적지 : ' + data.notify.depart[0] + ' , 테마 : ' + data.notify.theme[0])
+                    .subtitle('기간 : ' + data.notify.period[0] + ' , 예산 : ' + data.notify.asset[0] + '원')
+                    .images([
+                        builder.CardImage.create(session, getImgLink(data.notify.theme[0]))
+                    ])
+                    .buttons([
+                        builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                    ])];
+                    
+                    var reference = new builder.Message(session) //카드로 응답한다
+                        .attachmentLayout(builder.AttachmentLayout.carousel)
+                        .attachments(messageWithCarouselOfCards);
+
+                    session.send(reference);
+                    session.endDialog('처음으로 돌아갑니다.')
+                }
+            else if ( count == 2 ){
+                let messageWithCarouselOfCards = [ //카드로 받아서
+                    new builder.HeroCard(session)
+                        .title('목적지 : ' + data.notify.depart[0] + ' , 테마 : ' + data.notify.theme[0])
+                        .subtitle('기간 : ' + data.notify.period[0] + ' , 예산 : ' + data.notify.asset[0] + '원')
+                        .images([
+                            builder.CardImage.create(session, getImgLink(data.notify.theme[0]))
+                        ])
+                        .buttons([
+                            builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                        ]),
+                        new builder.HeroCard(session)
+                        .title('목적지 : ' + data.notify.depart[1] + ' , 테마 : ' + data.notify.theme[1])
+                        .subtitle('기간 : ' + data.notify.period[1] + ' , 예산 : ' + data.notify.asset[1] + '원')
+                        .images([
+                            builder.CardImage.create(session, getImgLink(data.notify.theme[1]))
+                        ])
+                        .buttons([
+                            builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                        ])];
+                        
+                    var reference = new builder.Message(session) //카드로 응답한다
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments(messageWithCarouselOfCards);
+
+                session.send(reference);
+                session.endDialog('처음으로 돌아갑니다.')
+                    }
+            else if ( count >= 3 ){
+                let messageWithCarouselOfCards = [ //카드로 받아서
+                    new builder.HeroCard(session)
+                        .title('목적지 : ' + data.notify.depart[count-3] + ' , 테마 : ' + data.notify.theme[count-3])
+                        .subtitle('기간 : ' + data.notify.period[count-3] + ' , 예산 : ' + data.notify.asset[count-3] + '원')
+                        .images([
+                                builder.CardImage.create(session, getImgLink(data.notify.theme[count-3]))
+                            ])
+                            .buttons([
+                                builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                            ]),
+                            new builder.HeroCard(session)
+                            .title('목적지 : ' + data.notify.depart[count-2] + ' , 테마 : ' + data.notify.theme[count-2])
+                            .subtitle('기간 : ' + data.notify.period[count-2] + ' , 예산 : ' + data.notify.asset[count-2] + '원')
+                            .images([
+                                builder.CardImage.create(session, getImgLink(data.notify.theme[count-2]))
+                            ])
+                            .buttons([
+                                builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                            ]),
+                            new builder.HeroCard(session)
+                            .title('목적지 : ' + data.notify.depart[count-1] + ' , 테마 : ' + data.notify.theme[count-1])
+                            .subtitle('기간 : ' + data.notify.period[count-1] + ' , 예산 : ' + data.notify.asset[count-1] + '원')
+                            .images([
+                                builder.CardImage.create(session, getImgLink(data.notify.theme[count-1]))
+                            ])
+                            .buttons([
+                                builder.CardAction.openUrl(session, 'https://www.jinair.com/booking/index?NaPm=ct%3Djrvcjozo%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Db0a4c08d367350e15b185fe659bd60258a3a1d82', '이동하기')
+                            ])];
+                            
+                    var reference = new builder.Message(session) //카드로 응답한다
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments(messageWithCarouselOfCards);
+
+                session.send(reference);
+                session.endDialog('처음으로 돌아갑니다.')
+                        }
+                    }
+                )
+            } 
+]).triggerAction({
+    matches: '맞춤항공권'
+});
 
 bot.dialog('weeksche', [//여기에 matching됨
         function (session, results) {
