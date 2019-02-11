@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!-- <link href="https://cdn.botframework.com/botframework-webchat/latest/botchat.css" rel="stylesheet" />
@@ -11,8 +11,9 @@
           #webchat > * {
             height: 100%;
             width: 100%;
-            background-image: url("https://i.imgur.com/qIcoCOP.png");
-            
+            background-image: url("https://i.imgur.com/qIcoCOP.png"); 
+            justify-content: center;
+
           }
         </style>
     </head>
@@ -20,25 +21,125 @@
     <div id="webchat" role="main"></div>
     <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
     <script>
-      
+      /*
+      function getConversationId(botConn) {
+        let conversationId = '';
+        let eConn = Object.values(botConn)
+        for(key in eConn[0]){
+              if (eConn[0].hasOwnProperty(key) && key=='conversationId') {
+                console.log("Key is " + key + ", value is " + eConn[0][key] + "\n");
+                conversationId = eConn[0][key];
+            }
+        };
+        return conversationId;
+      };
+      */
+
       const styleSet = window.WebChat.createStyleSet({
-        bubbleBackground: 'rgba(0, 0, 255, .1)',
-        bubbleFromUserBackground: 'rgba(0, 255, 0, .1)'
+        bubbleBackground: 'rgba(255, 0, 0, 0.2)',
+        bubbleFromUserBackground: 'rgba(255, 0, 0, .6)',
+        bubbleMinWidth: 400,
+        bubbleMaxWidth: 700,
+        paddingRegular: 10,
+        sendBoxHeight: 50,
       });
 
       // After generated, you can modify the CSS rules
       styleSet.textContent = { ...styleSet.textContent,
-        fontFamily: '\'Comic Sans MS\', \'Arial\', sans-serif',
-        fontWeight: 'bold'
+        //fontFamily: '\'Impact\', \'Charcoal\', sans-serif',
+        //fontFamily: '\'Comic Sans MS\', \'Arial\', sans-serif',
+        //_Ir0HVEwDrg.cwA.m8U.UfCvkn94_ice5nRkDPgnxJa-uWYuYVDAu_Q0a8bZHwg
+        //LeeNY82UPlA.cwA.5eE.dRcjpqtDsGPS07ko8BHh8tZekmhytVs9oi4Lc2yAcUA
+        fontFamily: '\'궁서\', "Times New Roman", sans-serif',
+        fontWeight: 'bold',
+        fontSize: '20'
       };
 
-      window.WebChat.renderWebChat({
-        directLine: window.WebChat.createDirectLine({ secret: 'Tw25McAbN-A.cwA.d0o.Kr0oDMNg4ZJu858mXANNJXwsmL0LUb14fOApuD1fKbA' }),
-        // Passing avatar initials when rendering Web Chat
-        botAvatarInitials: 'JAID',
-        userAvatarInitials: 'USER',
-        resize: 'detect'
-      }, document.getElementById('webchat'));
+      styleSet.avatar = { 
+      ...styleSet.avatar,
+     '&.from-user': { 
+         backgroundImage:'url(\'https://i.imgur.com/RFBjDbR.png\')' // 사람이미지
+      },
+     '&:not(.from-user)': {     
+         backgroundImage:'url(\'https://i.imgur.com/UMGiUEh.png\')' }  // 봇이미지
+      };
+
+      async function makeDirectLine() {
+        return await window.WebChat.createDirectLine({ secret: 'Tw25McAbN-A.cwA.d0o.Kr0oDMNg4ZJu858mXANNJXwsmL0LUb14fOApuD1fKbA' });
+      };
+
+      function getConversationId(botConn) {
+        let conn = {
+          id: botConn
+        };
+            
+        let eConn = Object.values(conn);
+        console.log('eConn');
+        console.log(eConn);
+
+        let userConversationID = eConn[0]['conversationId'];
+        console.log('userConversationID');
+        console.log(userConversationID);
+
+        return userConversationID;
+      };
+
+      async function createChat() {
+        //let botConnection = await window.WebChat.createDirectLine({ secret: 'QxnhqMrK9mw.cwA.NFY.Tf3aTjDoK0vahZ_w2wBgfTV73--w1th-m7Yfsi8tpoI' });
+        let botConnection = await makeDirectLine();
+        /*
+        window.WebChat.renderWebChat({
+          directLine: botConnection,
+          styleSet,
+          botAvatarInitials: ' ',
+          userAvatarInitials: ' '
+        }, document.getElementById('webchat'));  
+        */
+        
+        setTimeout(() => {
+          console.log('start conversationID');
+          let userConversationID = getConversationId(botConnection);          
+          let user = {
+                id: userConversationID,
+                name: 'user name'
+            };
+          
+          console.log('user');
+          console.log(user);
+          console.log('conversationId');      
+          console.log(userConversationID);          
+          console.log('call postActivity');
+          botConnection.postActivity({
+                  from: user,
+                  name: 'postLanguage',
+                  type: 'chatInit',
+                  value: 'ko'
+              })
+              .subscribe(function (id) {
+                  console.log('"trigger requestWelcomeDialog" sent');
+              });
+            
+          }, 1000*2);
+           
+          setTimeout(() => {
+            console.log('call renderWebChat');
+            window.WebChat.renderWebChat({
+              directLine: botConnection,
+              styleSet,
+              botAvatarInitials: ' ',
+              userAvatarInitials: ' '
+            }, document.getElementById('webchat'));  
+          }, 1000*1);
+      };
+
+      createChat();      
+     
+    
+      /*
+      postActivity(        
+          {from: { id: botConnection.conversationId }, type: "chatInit", value: userLang, name: "postLanguage"}
+        ).subscribe(id => console.log("success"));
+      */
     </script>
   </body>
 </html>
