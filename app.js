@@ -353,7 +353,7 @@ bot.dialog('recently', [
     (session)=>{
         log.FindUserFunc(TempID,(param)=>{
             data = JSON.parse(param);
-            var count = Object.values(data.schedule.depart).length;
+            var count = 3;
             if(count == 0){
                 session.send("최근 조회 내역이 없습니다.\n처음으로 돌아갑니다.")
                 session.beginDialog('/');
@@ -456,7 +456,7 @@ bot.dialog('fit', [
         session.send('================================================step 1 ==========================================');
         log.FindUserFunc(TempID,(param)=>{
             data = JSON.parse(param);
-            var count = Object.values(data.notify.depart).length;
+            var count = 3;
             if(count == 0){
                 session.send("최근 조회 내역이 없습니다.\n처음으로 돌아갑니다.")
                 session.beginDialog('/');
