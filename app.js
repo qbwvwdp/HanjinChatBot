@@ -84,18 +84,12 @@ var a = true;
 bot.on('conversationUpdate', function (message) {
     if (message.membersAdded) {
         message.membersAdded.forEach(function (identity) {
-			var tmp = 0;
             if (identity.id === message.address.bot.id) {
 				console.log('conversationUpdate -> it is me');
-				tmp++;
+                bot.beginDialog(message.address, '/'); // '/'를 만나면  /에 해당되는 dialog로 가라
             }
 			else{
-				tmp++;
 				console.log('conversationUpdate -> others');
-			}
-			
-			if(tmp==2){
-				bot.beginDialog(message.address, '/'); // '/'를 만나면  /에 해당되는 dialog로 가라
 			}
         });
     }
