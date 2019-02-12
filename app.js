@@ -198,21 +198,22 @@ bot.dialog('tnum', [
             Date_Entity = builder.EntityRecognizer.findEntity(data.entities, '항공조회.날짜');
             console.log('city:````````````````````````',city);
             var flag = false;
-            while(true){
-                if(city.entity === undefined || city.entity === null ){
-                    break;
-                }
+            while(city[0] && city[1]){
                 if(city[0].entity == Origin_Entity.entity){
                     if(city[1].entity == Destination_Entity.entity){
                         flag = true;
+                        console.log("두번째 루프");
                         break;
                     }
+                    break;
                 }
                 if(city[1].entity == Origin_Entity.entity){
                     if(city[0].entity == Destination_Entity.entity){
                         flag = true;
+                        console.log("세번째 루프");
                         break;
                     }
+                    break;
                 }
                 break;
             };
