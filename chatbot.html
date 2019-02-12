@@ -30,7 +30,9 @@
     <script>
       const styleSet = window.WebChat.createStyleSet({
         bubbleBackground: 'rgba(255, 255, 255, 0.9)',
+        bubbleBorderRadius: '20',
         bubbleFromUserBackground: 'rgba(51, 204, 0, 0.7)',
+        bubbleFromUserBorderRadius: '20',
         bubbleMinWidth: 400,
         bubbleMaxWidth: 700,
         paddingRegular: 10,
@@ -78,7 +80,7 @@
         let botConnection = await makeDirectLine();
 
         
-        setTimeout(() => {
+//        setTimeout(() => {
           console.log('start conversationID');
           let userConversationID = getConversationId(botConnection);          
           let user = {
@@ -101,9 +103,9 @@
                   console.log('"trigger requestWelcomeDialog" sent');
               });
             
-          }, 1000*2);
-           
-          setTimeout(() => {
+//          }, 1000*2);
+
+//          setTimeout(() => {
             console.log('call renderWebChat');
             window.WebChat.renderWebChat({
               directLine: botConnection,
@@ -111,7 +113,7 @@
               botAvatarInitials: ' ',
               userAvatarInitials: ' '
             }, document.getElementById('webchat'));  
-          }, 1000*1);
+//          }, 1000*1);
       };
 
       createChat();      

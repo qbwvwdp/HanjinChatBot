@@ -189,14 +189,18 @@ bot.dialog('tnum', [
             var Origin_Entity;
             var Destination_Entity;
             var Date_Entity;
+            
             Origin_Entity = builder.EntityRecognizer.findEntity(data.entities, '항공조회.출발지');
+            Origin_Score =  data.entities[data.entities.length()-1].score;
             Destination_Entity = builder.EntityRecognizer.findEntity(data.entities, '항공조회.목적지');
+            Destination_Score = data.entities[data.entities.length()-2].score;
             Date_Entity = builder.EntityRecognizer.findEntity(data.entities, '항공조회.날짜');
+            //Date_Score = data.entities[1].score;
             console.log(`data: ${Origin_Entity}`);
             console.log(`data: ${Destination_Entity}`);
             console.log(`data: ${Date_Entity}`);
             // A Card's Submit Action obj was received
-            if(Origin_Entity != null && Destination_Entity != null && Date_Entity != null){
+            if(Origin_Entity != null && Origin_Score >= 0.99 && Destination_Entity != null && Destination_Score >= 0.99 && Date_Entity != null){
                 console.log('모든 값이 제대로 나올 시');
                 session.send(`출발지 : ${Origin_Entity.entity}, 목적지 : ${Destination_Entity.entity}, 날짜 : ${Date_Entity.entity}`);
             // 정상인 경우
@@ -206,10 +210,10 @@ bot.dialog('tnum', [
                 return;
             }
             else{
-                if(Origin_Entity == null){
+                if(Origin_Entity == null || Origin_Score < 0.99){
                     session.send('출발지가 아닙니다.');
                 };
-                if(Destination_Entity == null){
+                if(Destination_Entity == null || Destination_Score < 0.99){
                     session.send('목적지가 아닙니다.');
                 };
                 if(Date_Entity == null){
