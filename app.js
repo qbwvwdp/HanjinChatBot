@@ -93,6 +93,12 @@ bot.on('conversationUpdate', function (message) {
 			}
         });
     }
+    else if (message.conversationReady) {
+        //console.log('******************************************');      
+        console.log('*************conversationReady************');      
+        bot.beginDialog(message.address, '/');
+        //console.log('******************************************');      
+    };
 });
 var TempID = "TEST-ID005";
 // (수정)
@@ -101,7 +107,7 @@ bot.dialog('/', [
         session.send('안녕하세요. 제이드(Jaid)입니다.');  
         builder.Prompts.text(
                 session, 
-                " 원하는 서비스를 입력해주세요.\n 예 ) 스케줄조회, 이벤트, 특가상품, 맞춤항공권,최근검색이력 "
+                " 원하는 서비스를 입력해주세요.\n 예 ) 스케줄조회, 이벤트, 특가상품 \n       맞춤항공권, 최근검색이력 "
                 );
 		
     },
@@ -841,7 +847,7 @@ bot.dialog('pass', //여기에 matching됨
                             builder.CardImage.create(session, 'https://imgur.com/tyaxeTP.png')
                         ])
                         .buttons([
-                            builder.CardAction.openUrl(session, 'https://www.jinair.com/promotion/eventView?evntSeq=10784', '이동하기')
+                            builder.CardAction.openUrl(session, 'https://www.jinair.com/promotion/eventList', '이동하기')
                         ])
                     ];
                     
