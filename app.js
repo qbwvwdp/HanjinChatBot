@@ -113,7 +113,7 @@ bot.dialog('/', [
         session.send('안녕하세요. 제이드(Jaid)입니다.');  
         builder.Prompts.text(
                 session, 
-                " 원하는 서비스를 입력해주세요.\n 예 ) 스케줄조회, 이벤트, 특가상품 \n       맞춤항공권, 최근검색이력 "
+                " 원하는 서비스를 입력해주세요.\n" + " - 스케줄조회\n" + " - 이벤트\n" + " - 특가상품\n" + " - 맞춤항공권\n" + " - 최근검색이력\n"
                 );
 		
     },
@@ -180,6 +180,17 @@ bot.dialog('ask', [
 bot.dialog('tnum', [
     function (session) {
         // Display Welcome card with Hotels and Flights search options
+		var Today = new Date();
+        var dd = Today.getDate();
+        var mm = Today.getMonth()+1; //January is 0!
+        var yyyy = Today.getFullYear();
+        if(dd<10) {
+            dd='0'+dd
+        }
+        if(mm<10) {
+            mm='0'+mm
+        }
+        var todayDate = yyyy+'-'+mm+'-'+dd;
 
         if (session.message && session.message.value) {
             var Query_ = session.message.value.checkin + ' ' + session.message.value.destination;
@@ -330,7 +341,8 @@ bot.dialog('tnum', [
                                 {
                                     'type': 'Input.Date',
                                     'id': 'checkin',
-                                    'speak': '<s>출발날짜를 입력해주세요 :</s>'
+                                    'speak': '<s>출발날짜를 입력해주세요 :</s>',
+									'value': todayDate
                                 }
                             ],
                             'actions': [
@@ -1189,6 +1201,18 @@ bot.dialog('특가Dialog', [//여기에 matching됨
 
 bot.dialog('맞춤항공권Dialog',[
     function (session) {
+		var luisAsset = 0;
+        var tmp = LoadInfo.getLuisIntent(session.message.text);
+        if(tmp.entities[0]){
+            var tmp2 = tmp.entities[0].entity;
+            var parsingTmp = tmp2.split('만');
+            if(parsingTmp[1]===undefined || parsingTmp[1]===null){
+                luisAsset = parseInt(parsingTmp[0])/10000;
+            }
+            else if ( parsingTmp[1] == ' 원'){
+                luisAsset = parseInt(parsingTmp[0]);
+            }
+        }
         // Display Welcome card with Hotels and Flights search options
         if (session.message && session.message.value) {
             console.log(session.message.value);
@@ -1306,7 +1330,8 @@ bot.dialog('맞춤항공권Dialog',[
                                     'type': 'Input.Text',
                                     'id': 'budget',
                                     'speak': '<s>예산을 입력해주세요 :</s>',
-                                    'default' : '1'
+                                    'default' : '1',
+									'value' : luisAsset
                                 },
                                 {
                                     'type': 'TextBlock',
