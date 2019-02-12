@@ -268,7 +268,7 @@ bot.dialog('tnum', [
                 'body': [
                     {
                         'type': 'Container',
-                        'speak': '<s>안녕하세요!</s><s>비행기 목적지와 출발날짜를 입력해 주세요.</s>',
+                        'speak': '<s>안녕하세요!</s><s>비행기 출발지와 목적지, 출발날짜를 입력해 주세요.</s>',
                         'items': [
                             {
                                 'type': 'ColumnSet',
@@ -297,7 +297,7 @@ bot.dialog('tnum', [
                                             },
                                             {
                                                 'type': 'TextBlock',
-                                                'text': '비행기 목적지와 출발날짜를 입력해 주세요.',
+                                                'text': '비행기 출발지와 목적지, 출발날짜를 입력해 주세요.',
                                                 'wrap': true
                                             }
                                         ]
@@ -325,12 +325,12 @@ bot.dialog('tnum', [
                                 },
                                 {
                                     'type': 'TextBlock',
-                                    'text': '목적지를 입력해주세요 :'
+                                    'text': '출발지와 목적지를 입력해주세요 :'
                                 },
                                 {
                                     'type': 'Input.Text',
                                     'id': 'destination',
-                                    'speak': '<s>목적지를 입력해주세요 :</s>',
+                                    'speak': '<s>출발지와 목적지를 입력해주세요 :</s>',
                                     'placeholder': '예) 김포에서 제주',
                                     'style': 'text'
                                 },
