@@ -156,7 +156,86 @@ bot.dialog('/', [
 
 bot.dialog('스케줄조회Dialog', [ //여기에 matching됨
     function (session) {
-        session.beginDialog('ask');
+        var luisTmp = LoadInfo.getLuisIntent(session.message.text);
+        console.log(luisTmp.entities)
+        if(luisTmp.entities[0])
+        {
+            var Today = new Date();
+            var luisDay = Today.getDate();
+            var luisMonth = Today.getMonth()+1; //January is 0!
+            var luisYear = Today.getFullYear();
+            var i =1;
+            if(luisDay<10) {
+                luisDay='0'+luisDay
+            }
+            if(luisMonth<10) {
+                luisMonth='0'+luisMonth
+            }
+            var combineDate = luisYear+" - "+luisMonth+" - "+luisDay;
+            console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+            console.log(luisTmp.entities)
+            var luisDepart = builder.EntityRecognizer.findEntity(luisTmp.entities, '항공조회.출발지');
+            var luisArrive = builder.EntityRecognizer.findEntity(luisTmp.entities, '항공조회.목적지');
+            var luisDate = builder.EntityRecognizer.findEntity(luisTmp.entities, '항공조회.날짜');
+            var luisCity = builder.EntityRecognizer.findAllEntities(luisTmp.entities, '도시/공항');
+           if(luisDate)
+           {
+            var tmp = luisDate.entity.split(' ')
+            console.log(tmp);
+            while(tmp[i] && tmp[i-1]){
+                if(tmp[i] == "년"){
+                    luisYear = (parseInt(tmp[i-1])<10 ? '0'+tmp[i-1] : tmp[i-1] );
+                }
+                if(tmp[i]=="월"){
+                    luisMonth = (parseInt(tmp[i-1])<10 ? '0'+tmp[i-1] : tmp[i-1] );
+                }
+                if(tmp[i]=="일"){
+                    luisDay = (parseInt(tmp[i-1])<10 ? '0'+tmp[i-1] : tmp[i-1] );
+                }
+                i++;
+            }
+           }
+           
+            var flag = false;
+                while(luisCity[0] && luisCity[1]){
+                    if(luisCity[0].entity == luisDepart.entity){
+                        if(luisCity[1].entity == luisArrive.entity){
+                            flag = true;
+                            break;
+                        }
+                        break;
+                    }
+                    if(luisCity[1].entity == luisDepart.entity){
+                        if(luisCity[0].entity == luisArrive.entity){
+                            flag = true;
+                            break;
+                        }
+                        break;
+                    }
+                    break;
+                };
+                combineDate = luisYear+" - "+luisMonth+" - "+luisDay;
+
+            if(luisDepart != null && luisArrive != null && flag)
+            {
+                session.send(`출발지 : ${luisDepart.entity}, 목적지 : ${luisArrive.entity}, 날짜 : ${combineDate}`);
+                log.FuncUpsert(['schedule',luisDepart.entity,luisArrive.entity,combineDate],TempID);
+                session.beginDialog('weeksche', session.message.value);
+            }
+            else{
+                session.beginDialog('ask');
+            }
+
+        }
+        else{
+            session.beginDialog('ask');
+        }
+        
+        console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+
+        //builder.EntityRecognizer.findAllEntities(data.entities, '도시/공항');
+        //builder.EntityRecognizer.findEntity(data.entities, '항공조회.출발지');
+
     },
     function(session, results) { 
         session.userData.text = results.response.entity;
@@ -191,7 +270,6 @@ bot.dialog('tnum', [
             mm='0'+mm
         }
         var todayDate = yyyy+'-'+mm+'-'+dd;
-
         if (session.message && session.message.value) {
             var Query_ = session.message.value.checkin + ' ' + session.message.value.destination;
             console.log("q = "+Query_);
@@ -241,6 +319,14 @@ bot.dialog('tnum', [
             // 정상인 경우
             
                 log.FuncUpsert(['schedule',Origin_Entity.entity,Destination_Entity.entity,Date_Entity.entity],TempID);
+                console.log("##########################")
+                console.log("##########################")
+                console.log("##########################")
+                console.log(session.message.value)
+                console.log("##########################")
+                console.log(typeof(session.message.value))
+                console.log("##########################")
+                console.log("##########################")
                 session.beginDialog('weeksche', session.message.value);
                 return;
             }
@@ -629,8 +715,8 @@ bot.dialog('fit', [
 
 bot.dialog('weeksche', [//여기에 matching됨
         function (session, results) {
-            console.log(`month : ${results.response}`);
-            session.userData.month = results.response;
+            //console.log(`month : ${results.response}`);
+            //session.userData.month = results.response;
                 let cards = [ //카드로 받아서
                     new builder.HeroCard(session)
                     .title('문의하신 목적지와 출발날짜에 따른 주간스케줄목록 입니다.')
