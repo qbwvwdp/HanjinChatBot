@@ -113,7 +113,7 @@ bot.dialog('/', [
         session.send('안녕하세요. 제이드(Jaid)입니다.');  
         builder.Prompts.text(
                 session, 
-                " 원하는 서비스를 입력해주세요.\n" + " - 스케줄조회\n" + " - 이벤트\n" + " - 특가상품\n" + " - 맞춤항공권\n" + " - 최근검색이력\n"
+                " 원하는 서비스를 입력해주세요.\n 예 ) 스케줄조회, 이벤트, 특가상품 \n       맞춤항공권, 최근검색이력 "
                 );
 		
     },
@@ -919,23 +919,54 @@ bot.dialog('next_process', [
         }
     }
 ])
-
+var data_3;
 
 bot.dialog('특가Dialog', [//여기에 matching됨
-    function (session) {        
-        session.send('현재 진행중인 특가를 알려드립니다.'); 
-        session.send('알고싶은 월(달)을 선택 해주세요.'); 
-        builder.Prompts.choice(
-            session, 
-            " 해당 월(달)의 특가로 이동합니다.", ["1월 ~ 3월", "4월 ~ 6월", "7월 ~ 9월", "10월 ~ 12월"],
-            { listStyle: builder.ListStyle.button });
-        },
+    function (session,results,next) {        
+        //console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%메세지 나오니?',session.message);
+        data_3 = LoadInfo.getLuisIntent(session.message.text);
+        //console.log(data_3);
+        //console.log(data_3.entities[0].entity);
+        if(data_3.entities[0]){ 
+            if(data_3.entities[0].entity == '1 월'|| data_3.entities[0].entity == '2 월' || data_3.entities[0].entity == '3 월' || data_3.entities[0].entity == '이 번 달' || data_3.entities[0].entity == '요 번 달'){
+                console.log('$$$$$$$$$$$$$야호 들어왔다$$$$$$$$$$$$$$$$$$$$');
+                session.userData.month = '1월 ~ 3월';
+                next();
+            }
+            else if(data_3.entities[0].entity == '4 월' || data_3.entities[0].entity == '5 월' || data_3.entities[0].entity == '6 월' || data_3.entities[0].entity == '다 음 달' || data_3.entities[0].entity == '담 달'){
+                console.log('$$$$$$$$$$$$$야호 들어왔다2$$$$$$$$$$$$$$$$$$$$');
+                session.userData.month = '4월 ~ 6월';
+                next();  
+            }
+            else if(data_3.entities[0].entity == '7 월' || data_3.entities[0].entity == '8 월' || data_3.entities[0].entity == '9 월'){
+                console.log('$$$$$$$$$$$$$야호 들어왔다3$$$$$$$$$$$$$$$$$$$$');
+                session.userData.month = '7월 ~ 9월';                    
+                next();
+            }  
+            else if(data_3.entities[0].entity == '10 월' || data_3.entities[0].entity == '11 월' || data_3.entities[0].entity == '12 월'){
+                console.log('$$$$$$$$$$$$$야호 들어왔다4$$$$$$$$$$$$$$$$$$$$');
+                session.userData.month = '10월 ~ 12월';
+                next();
+            }     
+        }
+        else{
+            //console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%메세지 나오니?',data_3);
+            session.send('현재 진행중인 특가를 알려드립니다.'); 
+            session.send('알고싶은 월(달)을 선택 해주세요.'); 
+            builder.Prompts.choice(
+                session, 
+                " 해당 월(달)의 특가로 이동합니다.", ["1월 ~ 3월", "4월 ~ 6월", "7월 ~ 9월", "10월 ~ 12월"],
+                { listStyle: builder.ListStyle.button });
+            }
+    },
 
         function (session, results) {
-            console.log(`month : ${results.response.entity}`);
-
-            session.userData.month = results.response.entity;
+            console.log('들어오라오라오랑로아로아롸!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+            if(!data_3.entities[0]){
+                session.userData.month = results.response.entity;
+            };
             if(session.userData.month === '1월 ~ 3월'){
+                console.log('1월에서 3월이닷~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
                 let cards = [ //카드로 받아서
                     new builder.HeroCard(session)
                     .title('1~3월 출발편 대상 특가 프로모션')
@@ -977,8 +1008,10 @@ bot.dialog('특가Dialog', [//여기에 matching됨
 
                 session.send(reply);
                 session.beginDialog('next_process');
+                data_3 = null;
 
             }else if(session.userData.month == '4월 ~ 6월'){
+                console.log('4월에서 6월이닷~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
                 let cards = [ //카드로 받아서
                     new builder.HeroCard(session)
                     .title('하와이 커플여행 특전')
@@ -1031,8 +1064,10 @@ bot.dialog('특가Dialog', [//여기에 matching됨
 
                 session.send(reply);
                 session.beginDialog('next_process');
+                data_3 = null;
 
             } else if(session.userData.month == '7월 ~ 9월'){
+                console.log('7월에서 9월이닷~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
                 let cards = [ //카드로 받아서
                     new builder.HeroCard(session)
                     .title('하와이 소아운임 특가이벤트')
@@ -1085,8 +1120,10 @@ bot.dialog('특가Dialog', [//여기에 matching됨
 
                 session.send(reply);
                 session.beginDialog('next_process');
+                data_3 = null;
 
             }else if(session.userData.month == '10월 ~ 12월'){
+                console.log('10월에서 12월이닷~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
                 let cards = [ //카드로 받아서
                     new builder.HeroCard(session)
                     .title('조호르바루 특가부터 헤택까지!')
@@ -1139,6 +1176,7 @@ bot.dialog('특가Dialog', [//여기에 matching됨
 
                 session.send(reply);
                 session.beginDialog('next_process');
+                data_3 = null;
 
             }else{
                 session.endDialog();
