@@ -98,7 +98,11 @@ var TempID = "TEST-ID005";
 bot.dialog('/', [
     function (session,args) {
 		console.log("***************************");
-        console.log("args : "+args);
+        console.log("args.message : "+args.message);
+        console.log("args.message.text : "+args.message.text);
+        console.log("args.messages : "+args.messages);
+        console.log("args.messages.text : "+args.messages.text);
+		console.log("***************************");
         session.send('안녕하세요. 제이드(Jaid)입니다.');  
         builder.Prompts.text(
                 session, 
