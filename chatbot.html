@@ -11,33 +11,26 @@
           #webchat > * {
             height: 100%;
             width: 100%;
-            background-image: url("https://i.imgur.com/qIcoCOP.png"); 
-            justify-content: center;
-
+            background-image: url("https://i.imgur.com/mAckcC9.png.png");
+            background-position:center;
+            background-size:contain;
           }
         </style>
     </head>
   <body>
+    <style>
+    	#webchat {
+        width: 100%;
+        height: 100%;   
+        justify-content: center;
+      }
+    </style>
     <div id="webchat" role="main"></div>
     <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
     <script>
-      /*
-      function getConversationId(botConn) {
-        let conversationId = '';
-        let eConn = Object.values(botConn)
-        for(key in eConn[0]){
-              if (eConn[0].hasOwnProperty(key) && key=='conversationId') {
-                console.log("Key is " + key + ", value is " + eConn[0][key] + "\n");
-                conversationId = eConn[0][key];
-            }
-        };
-        return conversationId;
-      };
-      */
-
       const styleSet = window.WebChat.createStyleSet({
-        bubbleBackground: 'rgba(255, 0, 0, 0.2)',
-        bubbleFromUserBackground: 'rgba(255, 0, 0, .6)',
+        bubbleBackground: 'rgba(255, 255, 255, 0.9)',
+        bubbleFromUserBackground: 'rgba(51, 204, 0, 0.7)',
         bubbleMinWidth: 400,
         bubbleMaxWidth: 700,
         paddingRegular: 10,
@@ -46,26 +39,22 @@
 
       // After generated, you can modify the CSS rules
       styleSet.textContent = { ...styleSet.textContent,
-        //fontFamily: '\'Impact\', \'Charcoal\', sans-serif',
-        //fontFamily: '\'Comic Sans MS\', \'Arial\', sans-serif',
-        //_Ir0HVEwDrg.cwA.m8U.UfCvkn94_ice5nRkDPgnxJa-uWYuYVDAu_Q0a8bZHwg
-        //LeeNY82UPlA.cwA.5eE.dRcjpqtDsGPS07ko8BHh8tZekmhytVs9oi4Lc2yAcUA
-        fontFamily: '\'궁서\', "Times New Roman", sans-serif',
-        fontWeight: 'bold',
+        fontFamily: '\'Comic Sans MS\', \'Charcoal\', sans-serif',
+        //fontFamily: '\'Comic Sans MS\', \'Arial\', sans-serif',//Charcoal
+        fontWeight: 'normal',
         fontSize: '20'
       };
-
       styleSet.avatar = { 
       ...styleSet.avatar,
      '&.from-user': { 
-         backgroundImage:'url(\'https://i.imgur.com/RFBjDbR.png\')' // 사람이미지
+         backgroundImage:'url(\'https://i.imgur.com/pFvpexS.png\')' // 사람이미지
       },
      '&:not(.from-user)': {     
-         backgroundImage:'url(\'https://i.imgur.com/UMGiUEh.png\')' }  // 봇이미지
+         backgroundImage:'url(\'https://i.imgur.com/ynLfa6D.png\')' }  // 봇이미지
       };
 
       async function makeDirectLine() {
-        return await window.WebChat.createDirectLine({ secret: 'QxnhqMrK9mw.cwA.NFY.Tf3aTjDoK0vahZ_w2wBgfTV73--w1th-m7Yfsi8tpoI' });
+        return await window.WebChat.createDirectLine({ secret: 'Tw25McAbN-A.cwA.d0o.Kr0oDMNg4ZJu858mXANNJXwsmL0LUb14fOApuD1fKbA' });
       };
 
       function getConversationId(botConn) {
@@ -87,14 +76,7 @@
       async function createChat() {
         //let botConnection = await window.WebChat.createDirectLine({ secret: 'QxnhqMrK9mw.cwA.NFY.Tf3aTjDoK0vahZ_w2wBgfTV73--w1th-m7Yfsi8tpoI' });
         let botConnection = await makeDirectLine();
-        /*
-        window.WebChat.renderWebChat({
-          directLine: botConnection,
-          styleSet,
-          botAvatarInitials: ' ',
-          userAvatarInitials: ' '
-        }, document.getElementById('webchat'));  
-        */
+
         
         setTimeout(() => {
           console.log('start conversationID');
@@ -133,13 +115,6 @@
       };
 
       createChat();      
-     
-    
-      /*
-      postActivity(        
-          {from: { id: botConnection.conversationId }, type: "chatInit", value: userLang, name: "postLanguage"}
-        ).subscribe(id => console.log("success"));
-      */
     </script>
   </body>
 </html>
