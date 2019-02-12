@@ -1324,7 +1324,7 @@ bot.dialog('맞춤항공권Dialog',[
                                 },
                                 {
                                     'type': 'TextBlock',
-                                    'text': '예산을 입력해주세요 ( 단위 KRW10,000 ):'
+                                    'text': '예산을 입력해주세요 ( 단위 만 원 ):'
                                 },
                                 {
                                     'type': 'Input.Text',
@@ -1379,7 +1379,8 @@ bot.dialog('맞춤항공권Dialog',[
                                         }
                                     ],
                                     'speak': '<s>테마를 선택해주세요 :</s>',
-                                    'default' : '친구'
+                                    'default' : '친구',
+                                    'value':'해변'
                                 }
                             ],
                             'actions': [
