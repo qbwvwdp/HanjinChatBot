@@ -97,17 +97,17 @@ var TempID = "TEST-ID005";
 // (수정)
 bot.dialog('/', [
     function (session,args) {
-		console.log("***************************");
-        console.log("args.message : "+args.message);
-        console.log("args.message.text : "+args.message.text);
-        console.log("args.messages : "+args.messages);
-        console.log("args.messages.text : "+args.messages.text);
-		console.log("***************************");
+		if(args.message.text === undefined ){
+			
+			
+		}
+		else{
         session.send('안녕하세요. 제이드(Jaid)입니다.');  
         builder.Prompts.text(
                 session, 
                 " 원하는 서비스를 입력해주세요.\n 예 ) 스케줄조회, 이벤트, 특가상품, 맞춤항공권,최근검색이력 "
                 );
+		}
     },
     function(session, results){
         var tmpLuis = LoadInfo.getLuisIntent(results.response);
