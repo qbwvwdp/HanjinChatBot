@@ -1,0 +1,1808 @@
+{
+  "luis_schema_version": "3.2.0",
+  "versionId": "0.1",
+  "name": "제이드",
+  "desc": "",
+  "culture": "ko-kr",
+  "tokenizerVersion": "1.0.0",
+  "intents": [
+    {
+      "name": "None"
+    },
+    {
+      "name": "맞춤항공권"
+    },
+    {
+      "name": "맞춤항공권 예약 현황"
+    },
+    {
+      "name": "스케줄조회"
+    },
+    {
+      "name": "시작화면"
+    },
+    {
+      "name": "예약조회"
+    },
+    {
+      "name": "이벤트"
+    },
+    {
+      "name": "최근검색이력"
+    },
+    {
+      "name": "출도착조회"
+    },
+    {
+      "name": "특가"
+    }
+  ],
+  "entities": [
+    {
+      "name": "금액",
+      "roles": []
+    },
+    {
+      "name": "항공조회.날짜",
+      "roles": []
+    },
+    {
+      "name": "항공조회.목적지",
+      "roles": []
+    },
+    {
+      "name": "항공조회.시간",
+      "roles": []
+    },
+    {
+      "name": "항공조회.출발지",
+      "roles": []
+    },
+    {
+      "name": "항공조회.편명",
+      "roles": []
+    }
+  ],
+  "composites": [],
+  "closedLists": [
+    {
+      "name": "나라",
+      "subLists": [
+        {
+          "canonicalForm": "한국",
+          "list": [
+            "대한민국",
+            "korea",
+            "south korea",
+            "republic of korea",
+            "KOREA"
+          ]
+        },
+        {
+          "canonicalForm": "일본",
+          "list": [
+            "japan",
+            "JAPAN"
+          ]
+        },
+        {
+          "canonicalForm": "중국",
+          "list": [
+            "CHINA",
+            "china"
+          ]
+        },
+        {
+          "canonicalForm": "대만",
+          "list": [
+            "타이완",
+            "taiwan",
+            "TAIWAN"
+          ]
+        },
+        {
+          "canonicalForm": "라오스",
+          "list": [
+            "LAOS",
+            "laos"
+          ]
+        },
+        {
+          "canonicalForm": "태국",
+          "list": [
+            "THAILAND",
+            "thailand"
+          ]
+        },
+        {
+          "canonicalForm": "베트남",
+          "list": [
+            "VIETNAM",
+            "vietnam"
+          ]
+        },
+        {
+          "canonicalForm": "말레이시아",
+          "list": [
+            "MALAYSIA",
+            "malaysia"
+          ]
+        },
+        {
+          "canonicalForm": "필리핀",
+          "list": [
+            "PHILIPPINES",
+            "philippines"
+          ]
+        }
+      ],
+      "roles": []
+    },
+    {
+      "name": "도시/공항",
+      "subLists": [
+        {
+          "canonicalForm": "인천",
+          "list": [
+            "ICN",
+            "icn"
+          ]
+        },
+        {
+          "canonicalForm": "김포",
+          "list": [
+            "서울",
+            "GMP",
+            "gmp"
+          ]
+        },
+        {
+          "canonicalForm": "부산",
+          "list": [
+            "PUS",
+            "pus"
+          ]
+        },
+        {
+          "canonicalForm": "제주",
+          "list": [
+            "CJU",
+            "cju"
+          ]
+        },
+        {
+          "canonicalForm": "청주",
+          "list": [
+            "CJJ",
+            "cjj"
+          ]
+        },
+        {
+          "canonicalForm": "광주",
+          "list": [
+            "KWJ",
+            "kwj"
+          ]
+        },
+        {
+          "canonicalForm": "도쿄",
+          "list": [
+            "나리타",
+            "NRT",
+            "nrt"
+          ]
+        },
+        {
+          "canonicalForm": "오사카",
+          "list": [
+            "간사이",
+            "KIX",
+            "kix"
+          ]
+        },
+        {
+          "canonicalForm": "후쿠오카",
+          "list": [
+            "FUK",
+            "fuk"
+          ]
+        },
+        {
+          "canonicalForm": "삿포로",
+          "list": [
+            "CTS",
+            "cts"
+          ]
+        },
+        {
+          "canonicalForm": "오키나와",
+          "list": [
+            "OKA",
+            "oka"
+          ]
+        },
+        {
+          "canonicalForm": "기타큐슈",
+          "list": [
+            "KKJ",
+            "kkj"
+          ]
+        },
+        {
+          "canonicalForm": "상하이",
+          "list": [
+            "푸동",
+            "PVG",
+            "pvg"
+          ]
+        },
+        {
+          "canonicalForm": "시안",
+          "list": [
+            "XIY",
+            "xiy"
+          ]
+        },
+        {
+          "canonicalForm": "홍콩",
+          "list": [
+            "HKG",
+            "hkg"
+          ]
+        },
+        {
+          "canonicalForm": "마카오",
+          "list": [
+            "MFM",
+            "mfm"
+          ]
+        },
+        {
+          "canonicalForm": "타이베이",
+          "list": [
+            "타이페이",
+            "타오위안",
+            "TPE",
+            "tpe"
+          ]
+        },
+        {
+          "canonicalForm": "방콕",
+          "list": [
+            "BKK",
+            "bkk"
+          ]
+        },
+        {
+          "canonicalForm": "푸껫",
+          "list": [
+            "푸켓",
+            "HKT",
+            "hkt"
+          ]
+        },
+        {
+          "canonicalForm": "세부",
+          "list": [
+            "CEB",
+            "ceb"
+          ]
+        },
+        {
+          "canonicalForm": "클락",
+          "list": [
+            "CRK",
+            "crk"
+          ]
+        },
+        {
+          "canonicalForm": "다낭",
+          "list": [
+            "DAD",
+            "dad"
+          ]
+        },
+        {
+          "canonicalForm": "하노이",
+          "list": [
+            "HAN",
+            "han"
+          ]
+        },
+        {
+          "canonicalForm": "비엔티안",
+          "list": [
+            "VTE",
+            "vte"
+          ]
+        },
+        {
+          "canonicalForm": "코타키나발루",
+          "list": [
+            "BKI",
+            "bki"
+          ]
+        },
+        {
+          "canonicalForm": "조호르바루",
+          "list": [
+            "JHB",
+            "jhb"
+          ]
+        },
+        {
+          "canonicalForm": "괌",
+          "list": [
+            "GUM",
+            "gum"
+          ]
+        },
+        {
+          "canonicalForm": "하와이",
+          "list": [
+            "HNL",
+            "hnl"
+          ]
+        },
+        {
+          "canonicalForm": "보라카이",
+          "list": [
+            "칼리보",
+            "KLO",
+            "klo"
+          ]
+        }
+      ],
+      "roles": []
+    },
+    {
+      "name": "월",
+      "subLists": [
+        {
+          "canonicalForm": "1월",
+          "list": [
+            "January",
+            "지난달",
+            "전달"
+          ]
+        },
+        {
+          "canonicalForm": "2월",
+          "list": [
+            "February",
+            "이번달",
+            "요번달"
+          ]
+        },
+        {
+          "canonicalForm": "3월",
+          "list": [
+            "March",
+            "다음달",
+            "담달"
+          ]
+        },
+        {
+          "canonicalForm": "4월",
+          "list": [
+            "April"
+          ]
+        },
+        {
+          "canonicalForm": "5월",
+          "list": [
+            "May"
+          ]
+        },
+        {
+          "canonicalForm": "6월",
+          "list": [
+            "June"
+          ]
+        },
+        {
+          "canonicalForm": "7월",
+          "list": [
+            "July"
+          ]
+        },
+        {
+          "canonicalForm": "8월",
+          "list": [
+            "August"
+          ]
+        },
+        {
+          "canonicalForm": "9월",
+          "list": [
+            "September"
+          ]
+        },
+        {
+          "canonicalForm": "10월",
+          "list": [
+            "October"
+          ]
+        },
+        {
+          "canonicalForm": "11월",
+          "list": [
+            "November"
+          ]
+        },
+        {
+          "canonicalForm": "12월",
+          "list": [
+            "December"
+          ]
+        }
+      ],
+      "roles": []
+    }
+  ],
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "prebuiltEntities": [],
+  "model_features": [],
+  "regex_features": [],
+  "patterns": [],
+  "utterances": [
+    {
+      "text": "10만원으로 갈 수 있는 항공권 알려줘",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "11월 04일 lj001 입니다",
+      "intent": "출도착조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 6
+        },
+        {
+          "entity": "항공조회.편명",
+          "startPos": 8,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "11월 11일 인천에서 괌",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 6
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 8,
+          "endPos": 9
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 13,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "12/18 icn hkg 출도착 시간 알려주세요",
+      "intent": "출도착조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 4
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 6,
+          "endPos": 8
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 10,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "123",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "15만원으로 갈수있는 항공권알려줘",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "19/04/23 내 비행기 도착시간이 언제야",
+      "intent": "출도착조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "190227 lj063 인천 코타키나발루 조회",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 5
+        },
+        {
+          "entity": "항공조회.편명",
+          "startPos": 7,
+          "endPos": 11
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 13,
+          "endPos": 14
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 16,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "1박2일 여행갈건데 항공권 추천해줘",
+      "intent": "맞춤항공권",
+      "entities": []
+    },
+    {
+      "text": "200000원 짜리 항공권 검색해줘",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 0,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "2017-06-21 제주, 상하이",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 9
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 11,
+          "endPos": 12
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 15,
+          "endPos": 17
+        }
+      ]
+    },
+    {
+      "text": "2019 - 02 - 08 icn 보라카이",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 13
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 15,
+          "endPos": 17
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 19,
+          "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "20190201 인천에서 도쿄 출도착",
+      "intent": "출도착조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 7
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 9,
+          "endPos": 10
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 14,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "2019-02-13 도쿄에서 인천",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 16,
+          "endPos": 17
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 11,
+          "endPos": 12
+        },
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "2019-04-19 삿포로에서 홍콩",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 9
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 11,
+          "endPos": 13
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 17,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "2019-08-27 김포에서 제주",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 9
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 11,
+          "endPos": 12
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 16,
+          "endPos": 17
+        }
+      ]
+    },
+    {
+      "text": "20190827 인천 중국 스케줄",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 7
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 9,
+          "endPos": 10
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 12,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "2019-3-5 인천에서 코타키나발루",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 7
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 9,
+          "endPos": 10
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 14,
+          "endPos": 19
+        }
+      ]
+    },
+    {
+      "text": "2020-04-15 상하이에서 인천",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 17,
+          "endPos": 18
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 11,
+          "endPos": 13
+        },
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "20만원으로 갈 수 있는 항공권 알려줘",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "25만원으로 갈 수 있는 항공권 알려줘",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "2박3일 여행에 맞는 항공권 알려줘",
+      "intent": "맞춤항공권",
+      "entities": []
+    },
+    {
+      "text": "2월 15일 김포에서 제주로 가는 항공편 알려줘",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 5
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 7,
+          "endPos": 8
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 12,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "2월 싼 비행기",
+      "intent": "특가",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "2월 특가상품이 있습니까",
+      "intent": "특가",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "30만원에 맞는 항공권 알려줘",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "30만원으로 갈 수 있는 항공권 알려줘",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "35만원으로 갈 수 있는 항공권 알려줘",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "3월 1일 인천에서 나리타행 비행기 있는지 확인 해줘",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 4
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 6,
+          "endPos": 7
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 11,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "3월 특가",
+      "intent": "특가",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "3일 일정 항공권 보여줘",
+      "intent": "맞춤항공권",
+      "entities": []
+    },
+    {
+      "text": "40만원 내로 갈 수 있는 여행지알려줘",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "50만원 1박2일 항공권 알 수 있을까",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "5시에 출발하는 김포에서 제주 가는 비행기요",
+      "intent": "출도착조회",
+      "entities": [
+        {
+          "entity": "항공조회.시간",
+          "startPos": 0,
+          "endPos": 1
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 9,
+          "endPos": 10
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 14,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "5월 특가 알려줘",
+      "intent": "특가",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "5월14일 김포에서 후쿠오카",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 4
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 6,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "5일일정 항공권 보여줘",
+      "intent": "맞춤항공권",
+      "entities": []
+    },
+    {
+      "text": "6월 15일 인천에서 방콕 출도착 조회",
+      "intent": "출도착조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 5
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 7,
+          "endPos": 8
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 12,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "6월 비행기일정 알려주세요",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "7/23, 인천, 세부, 오전 8시",
+      "intent": "출도착조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 3
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 6,
+          "endPos": 7
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 10,
+          "endPos": 11
+        },
+        {
+          "entity": "항공조회.시간",
+          "startPos": 14,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "9월 나리타공항행 비행기",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 1
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 3,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "give me event information",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "home화면",
+      "intent": "시작화면",
+      "entities": []
+    },
+    {
+      "text": "lj057 10시50분 출발시간",
+      "intent": "출도착조회",
+      "entities": [
+        {
+          "entity": "항공조회.편명",
+          "startPos": 0,
+          "endPos": 4
+        },
+        {
+          "entity": "항공조회.시간",
+          "startPos": 6,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "lj057 조회",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.편명",
+          "startPos": 0,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "reset",
+      "intent": "시작화면",
+      "entities": []
+    },
+    {
+      "text": "가나다라마바사아자차카타파하",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "가을 행사상품 알려줘",
+      "intent": "특가",
+      "entities": []
+    },
+    {
+      "text": "가장 싼 홍콩행 비행기",
+      "intent": "특가",
+      "entities": [
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 5,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "검색 내역",
+      "intent": "최근검색이력",
+      "entities": []
+    },
+    {
+      "text": "검색 이력 보여줘",
+      "intent": "최근검색이력",
+      "entities": []
+    },
+    {
+      "text": "검색 했던 내용",
+      "intent": "최근검색이력",
+      "entities": []
+    },
+    {
+      "text": "검색 히스토리",
+      "intent": "최근검색이력",
+      "entities": []
+    },
+    {
+      "text": "검색한 내역",
+      "intent": "최근검색이력",
+      "entities": []
+    },
+    {
+      "text": "겨울 행사상품 알려줘",
+      "intent": "특가",
+      "entities": []
+    },
+    {
+      "text": "김포에서 출발하는 30만원 이내 항공권알려줘",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 10,
+          "endPos": 13
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 0,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "나리타에서 인천 행 비행기 확인 해줘",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 0,
+          "endPos": 2
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 6,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "내 비행기 번호가 뭐야",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "내 비행기 시간이 뭐더라?",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "내 비행예약 정보 알고싶어",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "내 예약정보 좀 볼 수 있을까요?",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "내가 몇월 며칠 비행기가 있지",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "내가 무슨 예약을 했었죠??",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "내가 어디 비행기 예매했었죠?",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "내가 예매한 중국행 비행기",
+      "intent": "예약조회",
+      "entities": [
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 7,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "내가 일본 어디로 놀러가죠?",
+      "intent": "예약조회",
+      "entities": [
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 3,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "내가 탈 비행기 뭐임",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "다음 주 다낭",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 5,
+          "endPos": 6
+        },
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "당장 예약상황 알려줘",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "대한항공 아시아나항공",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "렌터카 이벤트 있어?",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "맞춤항공권",
+      "intent": "맞춤항공권",
+      "entities": []
+    },
+    {
+      "text": "맞춤항공권 예약 내역",
+      "intent": "최근검색이력",
+      "entities": []
+    },
+    {
+      "text": "맞춤항공권 예약 현황",
+      "intent": "맞춤항공권 예약 현황",
+      "entities": []
+    },
+    {
+      "text": "멋진 도시를 가고싶은데 나한테 맞는 항공권있어?",
+      "intent": "맞춤항공권",
+      "entities": []
+    },
+    {
+      "text": "메뉴 보여줘",
+      "intent": "시작화면",
+      "entities": []
+    },
+    {
+      "text": "모든 이벤트 알려줘",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "모바일 예약조회 알려줘",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "뭐",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "뭘봐",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "방콕편 가장 저렴하게 나온 특가있어?",
+      "intent": "특가",
+      "entities": []
+    },
+    {
+      "text": "방콕행 비행기 도착예정시간 알려줘",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "배송 이벤트 있어?",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "봄 행사상품 알려줘",
+      "intent": "특가",
+      "entities": []
+    },
+    {
+      "text": "비행기 예약내역 알고싶어",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "비행기 조회 좀 해봐",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "비행기 탑승권 보여줘",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "비행기 할인 혜택이 있나요??",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "비행기표 할인 방법",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "ㅅㄱ",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "서울/인천(icn) 편도 후쿠오카(fuk) 출발시간",
+      "intent": "출도착조회",
+      "entities": [
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 0,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "수하물 보관 이벤트 있어?",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "숙박이벤트있어?",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "스케줄조회 좀 부탁해",
+      "intent": "스케줄조회",
+      "entities": []
+    },
+    {
+      "text": "시작",
+      "intent": "시작화면",
+      "entities": []
+    },
+    {
+      "text": "시작 메뉴가 뭐임",
+      "intent": "시작화면",
+      "entities": []
+    },
+    {
+      "text": "시작메뉴화면",
+      "intent": "시작화면",
+      "entities": []
+    },
+    {
+      "text": "시작지점으로",
+      "intent": "시작화면",
+      "entities": []
+    },
+    {
+      "text": "시작화면 보여주세요",
+      "intent": "시작화면",
+      "entities": []
+    },
+    {
+      "text": "싸고 짧게 일본여행가고싶은데",
+      "intent": "특가",
+      "entities": [
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 6,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "아무 곳이나 싸게 나온 비행기 있니?",
+      "intent": "특가",
+      "entities": []
+    },
+    {
+      "text": "아에이오우",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "아이와 함께 여행가는데 나한테 맞는 항공권있어?",
+      "intent": "맞춤항공권",
+      "entities": []
+    },
+    {
+      "text": "알리미",
+      "intent": "맞춤항공권",
+      "entities": []
+    },
+    {
+      "text": "야호",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "여름 행사 상품 알려줘",
+      "intent": "특가",
+      "entities": []
+    },
+    {
+      "text": "여행자보험 이벤트 있어?",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "예약 재확인",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "예약 히스토리",
+      "intent": "최근검색이력",
+      "entities": []
+    },
+    {
+      "text": "예약조회해줘",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "예약한 제주도 비행기 출발시간이 몇 시야?",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "오늘 icn 편도 han",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 1
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 3,
+          "endPos": 5
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 10,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "오늘 미세먼지 상태 보여줘",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "오늘 인천공항에서 세부",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 1
+        },
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 3,
+          "endPos": 4
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 10,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "오늘의 event!!!",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "오늘의 특가 상품 목록",
+      "intent": "특가",
+      "entities": []
+    },
+    {
+      "text": "오리 꽥꽥",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "온라인 예약조회 알려줘",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "요번달 하노이 여행",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "우끼끼",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "이번 달 내 비행기 예약 조회해주세요",
+      "intent": "예약조회",
+      "entities": []
+    },
+    {
+      "text": "이번달 특가상품",
+      "intent": "특가",
+      "entities": [
+        {
+          "entity": "항공조회.날짜",
+          "startPos": 0,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "제주도 특별할인",
+      "intent": "특가",
+      "entities": [
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 0,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "제주에서 김포로 가는 비행기 알려줘",
+      "intent": "스케줄조회",
+      "entities": [
+        {
+          "entity": "항공조회.출발지",
+          "startPos": 0,
+          "endPos": 1
+        },
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 5,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "제휴 혜택 정보엔 뭐가 있음",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "제휴카드 할인 있나요",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "주간스케줄",
+      "intent": "스케줄조회",
+      "entities": []
+    },
+    {
+      "text": "즉시할인 이벤트 알고싶어",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "진행중인 모든 특가 알려줘",
+      "intent": "특가",
+      "entities": []
+    },
+    {
+      "text": "진행중인 프로모션 알려줘",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "진행중인 프로모션 있어?",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "찾은 내역",
+      "intent": "최근검색이력",
+      "entities": []
+    },
+    {
+      "text": "처음",
+      "intent": "시작화면",
+      "entities": []
+    },
+    {
+      "text": "처음으로 되돌아가",
+      "intent": "시작화면",
+      "entities": []
+    },
+    {
+      "text": "초특가 말레이시아 여행",
+      "intent": "특가",
+      "entities": [
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 4,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "최근",
+      "intent": "최근검색이력",
+      "entities": []
+    },
+    {
+      "text": "최근 검색 했던 내용 보여줘",
+      "intent": "최근검색이력",
+      "entities": []
+    },
+    {
+      "text": "최근 조회",
+      "intent": "최근검색이력",
+      "entities": []
+    },
+    {
+      "text": "출도착조회알려줘",
+      "intent": "출도착조회",
+      "entities": []
+    },
+    {
+      "text": "친구와 함께 갈만한 15만원 이내 항공권있어?",
+      "intent": "맞춤항공권",
+      "entities": [
+        {
+          "entity": "금액",
+          "startPos": 11,
+          "endPos": 14
+        }
+      ]
+    },
+    {
+      "text": "태국 1박2일 가고 싶은데 싸게 나온 비행기 있어?",
+      "intent": "특가",
+      "entities": [
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 0,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "특가할인정보 알려주세요",
+      "intent": "특가",
+      "entities": []
+    },
+    {
+      "text": "푸켓 싸게 가고 싶어요",
+      "intent": "특가",
+      "entities": [
+        {
+          "entity": "항공조회.목적지",
+          "startPos": 0,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "프로모션 정보를 알려주세요",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "할인받을 수 있는 방법 알려줘",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "할인상품 알고싶어",
+      "intent": "특가",
+      "entities": []
+    },
+    {
+      "text": "항공 알리미",
+      "intent": "맞춤항공권 예약 현황",
+      "entities": []
+    },
+    {
+      "text": "항공권 검색할래",
+      "intent": "맞춤항공권",
+      "entities": []
+    },
+    {
+      "text": "항공권 싸게 살 방법 좀 알려줘",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "해변 가고싶은데 나한테 맞는 항공권 있어?",
+      "intent": "맞춤항공권",
+      "entities": []
+    },
+    {
+      "text": "행사상품정보",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "현재 무슨 이벤트 해",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "호텔 이벤트 있어?",
+      "intent": "이벤트",
+      "entities": []
+    },
+    {
+      "text": "홈",
+      "intent": "시작화면",
+      "entities": []
+    },
+    {
+      "text": "히스토리",
+      "intent": "최근검색이력",
+      "entities": []
+    }
+  ],
+  "settings": []
+}
